@@ -1,4 +1,4 @@
-# maaaaaaxx.github.io/Website
+# maaaaaaxx.github.io/website
 
 Two long-form guides to RedM for Australian players, served by GitHub Pages
 from this repository. There is no build step and there are no dependencies: two
@@ -7,7 +7,7 @@ HTML files, two stylesheets, a sitemap and a robots.txt.
 Live at:
 
 ```
-https://maaaaaaxx.github.io/Website/
+https://maaaaaaxx.github.io/website/
 ```
 
 This is a GitHub Pages **project** site, so the repository name is part of the
@@ -80,7 +80,7 @@ file at the root turns all of that off.
 4. The first build usually finishes within a minute or two, and the URL can
    take up to about ten minutes to start answering on a brand new site. The
    **Actions** tab shows the build, and a green tick there means it is served.
-5. Open `https://maaaaaaxx.github.io/Website/` and check the page has its
+5. Open `https://maaaaaaxx.github.io/website/` and check the page has its
    stylesheets. A page that loads with no styling means a path went absolute
    somewhere, because an absolute path on a project site resolves against
    `maaaaaaxx.github.io/` and misses this repository entirely.
@@ -94,7 +94,7 @@ Afterwards, publishing a change is a push to `main`.
 
 Add the property to [Google Search
 Console](https://search.google.com/search-console) and to Bing Webmaster Tools,
-then submit `https://maaaaaaxx.github.io/Website/sitemap.xml` to both.
+then submit `https://maaaaaaxx.github.io/website/sitemap.xml` to both.
 
 One caveat on `robots.txt`: a crawler only reads it at the root of a host, and
 this is a project site, so the file that is actually fetched is

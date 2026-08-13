@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  maaaaaaxx.github.io/Website
+  maaaaaaxx.github.io/website
 
   Two pages, both long-form and both written to stand on their own. There
   was a third, an install guide, and it was removed because redm.thepub.beer
@@ -22,14 +22,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://maaaaaaxx.github.io/Website/</loc>
+    <loc>https://maaaaaaxx.github.io/website/</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://maaaaaaxx.github.io/Website/redm-vs-fivem.html</loc>
+    <loc>https://maaaaaaxx.github.io/website/redm-vs-fivem.html</loc>
     <lastmod>2026-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

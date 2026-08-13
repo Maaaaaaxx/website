@@ -1,4 +1,4 @@
-# maaaaaaxx.github.io/Website
+# maaaaaaxx.github.io/website
 #
 # The satellite. Two long-form guides written to be useful on their own,
 # with a disclosure on every page naming who published them.
@@ -8,7 +8,7 @@
 # delete the page, not to hide it in this file.
 #
 # A robots.txt is only read at the root of a host. This site is a project
-# page served from https://maaaaaaxx.github.io/Website/, so the file a crawler
+# page served from https://maaaaaaxx.github.io/website/, so the file a crawler
 # actually fetches is https://maaaaaaxx.github.io/robots.txt, which belongs to
 # the account's user site and not to this repository. This copy is served at
 # /Website/robots.txt, where nothing is obliged to look for it.
@@ -59,4 +59,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://maaaaaaxx.github.io/Website/sitemap.xml
+Sitemap: https://maaaaaaxx.github.io/website/sitemap.xml
