@@ -9,8 +9,9 @@
   within this site only.
 
   The host in every <loc> must match the GitHub Pages URL exactly, including
-  the trailing slash on the index and the capital W in /Website/. A project
-  page's path is case sensitive: /website/ is a 404 on the same repository.
+  the trailing slash on the index and the lowercase name in /website/. A project
+  page's path is case sensitive, so /Website/ is a 404 on this repository: the
+  repo was renamed from Website to website and 57 references had to follow it.
   If this site ever moves to a custom domain, this file, the canonical tag on
   both pages and the Sitemap line in robots.txt all change together, or
   Search Console reports the sitemap as containing URLs on a different host
