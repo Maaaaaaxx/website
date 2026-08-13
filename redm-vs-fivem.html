@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>RedM vs FiveM: an honest comparison for players who already know one</title>
+<meta name="description" content="RedM and FiveM are built by the same team and work the same way, but they are not the same hobby. What carries over if you already play FiveM, what the smaller RedM ecosystem actually costs you, how the pace of 1899 changes roleplay, and which one suits you.">
+<link rel="canonical" href="https://maaaaaaxx.github.io/Website/redm-vs-fivem.html">
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="The Pub RedM">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Australian RedM Guides">
+<meta property="og:locale" content="en_AU">
+<meta property="og:title" content="RedM vs FiveM: an honest comparison">
+<meta property="og:description" content="Same team, same client model, different hobby. What carries over from FiveM, what the smaller ecosystem costs, and which one suits you.">
+<meta property="og:url" content="https://maaaaaaxx.github.io/Website/redm-vs-fivem.html">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RedM vs FiveM">
+<meta name="twitter:description" content="What carries over if you already play FiveM, and what does not.">
+
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/satellite.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "RedM vs FiveM: an honest comparison for players who already know one",
+  "description": "RedM and FiveM are built by the same Cfx.re team and work the same way, but they are not the same hobby. What carries over, what the smaller RedM ecosystem costs, how the pace of 1899 changes roleplay, and which one suits you.",
+  "inLanguage": "en-AU",
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-13",
+  "url": "https://maaaaaaxx.github.io/Website/redm-vs-fivem.html",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://maaaaaaxx.github.io/Website/redm-vs-fivem.html" },
+  "isPartOf": { "@id": "https://maaaaaaxx.github.io/Website/#website" },
+  "author": { "@id": "https://redm.thepub.beer/#org" },
+  "publisher": { "@id": "https://redm.thepub.beer/#org" },
+  "about": [
+    { "@type": "Thing", "name": "RedM" },
+    { "@type": "Thing", "name": "FiveM" },
+    { "@type": "VideoGame", "name": "Red Dead Redemption 2" },
+    { "@type": "VideoGame", "name": "Grand Theft Auto V" }
+  ],
+  "mentions": [
+    {
+      "@type": "Organization",
+      "@id": "https://redm.thepub.beer/#org",
+      "name": "The Pub RedM",
+      "url": "https://redm.thepub.beer/",
+      "parentOrganization": { "@id": "https://thepub.beer/#org" }
+    }
+  ],
+  "keywords": "RedM vs FiveM, RedM or FiveM, difference between RedM and FiveM, Red Dead roleplay, GTA roleplay"
+}
+</script>
+
+<!-- The WebSite this page belongs to. It is published by the Organization at
+     https://redm.thepub.beer/#org and it is not that Organization's own site,
+     so the two are named separately and only the publisher line joins them.
+     See the longer note in index.html. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://maaaaaaxx.github.io/Website/#website",
+  "url": "https://maaaaaaxx.github.io/Website/",
+  "name": "Australian RedM Guides",
+  "inLanguage": "en-AU",
+  "publisher": { "@id": "https://redm.thepub.beer/#org" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Testing a RedM server's connection", "item": "https://maaaaaaxx.github.io/Website/" },
+    { "@type": "ListItem", "position": 2, "name": "RedM vs FiveM", "item": "https://maaaaaaxx.github.io/Website/redm-vs-fivem.html" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is RedM the same as FiveM?",
+      "acceptedAnswer": { "@type": "Answer", "text": "They are separate clients from the same developer, Cfx.re. They share the same idea, connecting a legitimately owned copy of a Rockstar game to community run servers, and much of the same underlying technology, but they are separate downloads for separate games. FiveM is for Grand Theft Auto V and RedM is for Red Dead Redemption 2. Owning one does not give you the other." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use FiveM scripts on a RedM server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not directly. The scripting concepts are shared, the resource format is the same and a developer moves between them easily, but the two games expose different native functions, different UI systems and completely different assets. A FiveM script is a starting point for a port, not a drop-in. In practice most RedM resources are written for RedM." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which has more servers and players, RedM or FiveM?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FiveM, by a very wide margin. FiveM has been running since 2014 and has a far larger player base, server count and script ecosystem. RedM launched later and stays much smaller. That gap is the single most useful thing to understand before switching: you get fewer servers to choose from and fewer ready-made scripts, and in exchange the servers that do exist tend to be less alike." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need both games to play both?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. FiveM requires a legitimate PC copy of Grand Theft Auto V and RedM requires a legitimate PC copy of Red Dead Redemption 2. Neither client is a way to play a game you do not own, and neither works on console." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is RedM slower than FiveM?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, deliberately and unavoidably. The fastest reliable travel in 1899 is a horse, so crossing the map takes minutes rather than seconds, and that changes what roleplay is possible. Meeting somebody in the next town is a plan rather than an impulse. Players who want that pace consider it the whole point, and players who want a fast city loop find it tedious. It is the clearest fork in the decision." }
+    },
+    {
+      "@type": "Question",
+      "name": "I am a FiveM developer. How much carries over to RedM?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The architecture carries over almost entirely: resources, manifests, client and server Lua, events, the same networking model and the same server configuration. What does not carry over is the native function set, the UI and prompt systems, and the assets. Expect to be productive quickly and to spend the first weeks discovering that a native you relied on does not exist here, is named differently or behaves differently." }
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="boards">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="./">
+      <span class="brand__name">Australian RedM Guides</span>
+      <span class="brand__note">Published by The Pub, written to stand on their own</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="./">Testing a server</a>
+      <a href="redm-vs-fivem.html" aria-current="page">RedM vs FiveM</a>
+    </nav>
+  </div>
+  <div class="wrap">
+    <p class="site-header__by">
+      Published by <a href="https://redm.thepub.beer/" rel="noopener">The Pub</a>, a free
+      Australian RedM server hosted in Sydney. Read the
+      <a href="#australia">disclosure</a> before you weigh anything here.
+    </p>
+  </div>
+</header>
+
+<main id="main">
+  <article class="wrap">
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="./">Testing a RedM server's connection</a></li>
+        <li aria-current="page">RedM vs FiveM</li>
+      </ol>
+    </nav>
+
+    <div class="masthead">
+      <h1>RedM vs FiveM</h1>
+      <p class="standfirst">
+        Same developer, same idea, same way of connecting. Almost everything written about the
+        difference stops there, which is not much help to somebody deciding where to spend a
+        winter. This page is for the two people who actually ask the question: a FiveM player
+        wondering whether to try the other one, and a FiveM developer wondering how much of what
+        they know still applies.
+      </p>
+      <div class="byline">
+        <span>Published 11 August 2026</span>
+        <span>Last checked 11 August 2026</span>
+        <span>Written for PC players in Australia and New Zealand</span>
+      </div>
+    </div>
+
+    <div class="prose">
+
+      <section id="short" aria-labelledby="h-short">
+        <h2 id="h-short">The short answer</h2>
+
+        <p>
+          FiveM is a modification client for Grand Theft Auto V. RedM is a modification client for
+          Red Dead Redemption 2. Both are made by Cfx.re, both need you to own the game on PC, both
+          connect you to servers other people run, and both are dominated by roleplay communities.
+          If you understand how one works you understand how the other works.
+        </p>
+
+        <p>
+          The differences that matter are not technical. They are the pace of the world, the size of
+          the ecosystem, and what a server is therefore able to be.
+        </p>
+
+        <div class="table-wrap bleed">
+          <table class="table">
+            <caption>The differences a player actually feels. Individual servers vary enormously, so read these as tendencies rather than rules.</caption>
+            <thead>
+              <tr>
+                <!-- The corner cell of a two-axis table is not a header for
+                     anything, so it is a td. An empty th would announce a
+                     blank column heading to a screen reader. -->
+                <td></td>
+                <th scope="col">FiveM</th>
+                <th scope="col">RedM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Base game</th>
+                <td>Grand Theft Auto V, PC</td>
+                <td>Red Dead Redemption 2, PC</td>
+              </tr>
+              <tr>
+                <th scope="row">Setting</th>
+                <td>Modern day Los Santos and Blaine County</td>
+                <td>1899 America, five states, no telephone and no engine</td>
+              </tr>
+              <tr>
+                <th scope="row">Crossing the map</th>
+                <td>Seconds to a couple of minutes by car</td>
+                <td>Several minutes by horse, longer by wagon, and the train has a timetable</td>
+              </tr>
+              <tr>
+                <th scope="row">Size of the scene</th>
+                <td>Very large. Thousands of servers, an enormous script market</td>
+                <td>Much smaller. Fewer servers, a thin script market, more written from scratch</td>
+              </tr>
+              <tr>
+                <th scope="row">Finding a server that suits you</th>
+                <td>Easy. The problem is choosing between many similar ones</td>
+                <td>Harder. Fewer options, and they differ from each other more</td>
+              </tr>
+              <tr>
+                <th scope="row">How long a session runs</th>
+                <td>Short sessions work. You can do something in forty minutes</td>
+                <td>Rewards long sessions. Forty minutes is a ride and one conversation</td>
+              </tr>
+              <tr>
+                <th scope="row">Combat</th>
+                <td>Fast, automatic weapons, cover and vehicles</td>
+                <td>Slow, single action reloads, deadeye, and a horse that can be shot out from under you</td>
+              </tr>
+              <tr>
+                <th scope="row">Australian servers</th>
+                <td>Several established ones</td>
+                <td>Very few, which is why finding one is a research problem</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="same" aria-labelledby="h-same">
+        <h2 id="h-same">What is genuinely the same</h2>
+
+        <p>
+          If you already play FiveM, none of this will need learning again.
+        </p>
+
+        <ul>
+          <li>
+            <strong>The connection model.</strong> A client that launches your own installed copy of
+            the game, a server list, and a direct connect address. Joining a server downloads that
+            server's resources to a local cache, so the first join is slow and later joins are not.
+          </li>
+          <li>
+            <strong>Server ownership.</strong> Anybody can run one. Nothing is hosted by Rockstar
+            and nothing you do on a community server touches your Rockstar progress.
+          </li>
+          <li>
+            <strong>Every server is its own game.</strong> Two servers can share nothing beyond the
+            map. This is more true on RedM, not less.
+          </li>
+          <li>
+            <strong>Discord as the front desk.</strong> Rules, support, appeals, applications
+            where there are any, and announcements live in Discord on both. If a server's Discord
+            is dead, so is the server.
+          </li>
+          <li>
+            <strong>Two ways in.</strong> Allowlisted servers on both sides make you apply and
+            wait, which is the most reliable filter either community has. Open servers let you
+            connect and do the same work through moderation afterwards. Both are common and
+            neither is a mark of how serious a server is.
+          </li>
+          <li>
+            <strong>Cache trouble.</strong> The same class of problem and the same fix. When
+            something is inexplicably broken on one server and fine on others, clear the cache.
+          </li>
+        </ul>
+      </section>
+
+      <section id="pace" aria-labelledby="h-pace">
+        <h2 id="h-pace">The difference that decides it: pace</h2>
+
+        <p>
+          Everything else on this page is detail. This is the part that determines whether you
+          enjoy RedM, and it is not a matter of taste in the way people usually mean.
+        </p>
+
+        <p>
+          In Los Santos, distance is close to free. If somebody says there is a situation at the
+          docks, you are at the docks. The result is that a FiveM session can contain several
+          unrelated things, and a server can run a plot that assumes people can be assembled at
+          short notice.
+        </p>
+
+        <p>
+          In 1899 the fastest thing you own is a horse. Valentine to Saint Denis is a real ride.
+          That single fact rewrites what roleplay is:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Travel becomes content, or it becomes tedium.</strong> There is no third
+            outcome. On a good server the ride is where conversations happen, where you get robbed,
+            where you find something. On a thin server it is a loading screen you have to steer.
+          </li>
+          <li>
+            <strong>Plans replace impulses.</strong> Meeting someone in the next town is arranged,
+            not decided. Groups matter more, because riding somewhere alone to find nobody there is
+            an expensive mistake.
+          </li>
+          <li>
+            <strong>Geography becomes real.</strong> Towns develop characters, because the people
+            in them are the people who live there. A regional identity is something FiveM servers
+            work hard to fake and RedM servers get for free.
+          </li>
+          <li>
+            <strong>Consequence carries weight.</strong> Losing your horse, your kit or your
+            standing costs hours, not minutes. Servers lean on this, and it is why RedM roleplay
+            has a reputation for being slower and more serious.
+          </li>
+          <li>
+            <strong>Crime is different work.</strong> There is no getaway car. A robbery is planned
+            around escape routes, terrain and how fast the law can ride, which makes it more
+            interesting to plan and much harder to improvise.
+          </li>
+        </ul>
+
+        <div class="note">
+          <span class="note__title">The honest version</span>
+          <p>
+            If reading that made the game sound better, RedM is likely to suit you. If it made the
+            game sound like admin, it will not, and no amount of good scripting on a server fixes
+            that. This is the fork. Everything below is a smaller decision.
+          </p>
+        </div>
+      </section>
+
+      <section id="ecosystem" aria-labelledby="h-ecosystem">
+        <h2 id="h-ecosystem">Ecosystem size, and what it actually costs you</h2>
+
+        <p>
+          FiveM has had a decade and an enormous player base. RedM has neither. That gap shows up
+          in ways worth knowing about before you switch, and it cuts both ways.
+        </p>
+
+        <h3>What the smaller scene costs</h3>
+
+        <ul>
+          <li>
+            <strong>Fewer servers to choose from.</strong> If a RedM server is not for you, the next
+            option may not be a close substitute. On FiveM there is always another server doing
+            roughly the same thing better.
+          </li>
+          <li>
+            <strong>Fewer ready-made scripts.</strong> A RedM server wanting a system nobody has
+            published has to build it. That means slower development and more bugs that are unique
+            to that server, because nobody else has hit them.
+          </li>
+          <li>
+            <strong>Smaller development pool.</strong> Fewer people know the RedM natives well.
+            Servers lose a developer and feel it for months.
+          </li>
+          <li>
+            <strong>Thinner documentation.</strong> When something breaks, the forum thread that
+            solves it may not exist. On FiveM it almost always does.
+          </li>
+          <li>
+            <strong>Population risk.</strong> A RedM server with thirty regulars is doing well. Lose
+            ten of them to a game release and the world feels empty in a way a large FiveM server
+            does not.
+          </li>
+        </ul>
+
+        <h3>What the smaller scene buys</h3>
+
+        <ul>
+          <li>
+            <strong>Servers differ from each other.</strong> The FiveM market has so many good
+            public scripts that a lot of servers are the same server with a different logo. RedM
+            servers are forced to build, so what they build is theirs.
+          </li>
+          <li>
+            <strong>Communities are smaller and know each other.</strong> Thirty regulars who all
+            recognise each other's characters produces continuity that a two hundred player server
+            cannot.
+          </li>
+          <li>
+            <strong>Less of the ambient nonsense.</strong> The barrier to entry, buying a large
+            single player game and installing a second client for it, filters out a lot of drive-by
+            behaviour before it arrives.
+          </li>
+          <li>
+            <strong>Staff are reachable.</strong> On a small server the people who wrote the systems
+            are in the Discord and will answer you. That is rare and worth something.
+          </li>
+        </ul>
+
+        <p>
+          The right way to weigh this is not "which is bigger". It is whether you want a wide choice
+          of similar servers or a narrow choice of distinct ones.
+        </p>
+      </section>
+
+      <section id="mechanics" aria-labelledby="h-mechanics">
+        <h2 id="h-mechanics">Mechanical differences you will notice in the first hour</h2>
+
+        <ul>
+          <li>
+            <strong>Your horse is a character.</strong> It has stamina, health, a bond level, a
+            temperament and a saddle that holds your things. It can be scared, injured and killed.
+            Servers treat it closer to a second character than a vehicle, and losing one lands
+            differently to losing a car.
+          </li>
+          <li>
+            <strong>Weapons need maintenance and reload slowly.</strong> Firearms degrade and foul.
+            A gunfight is a handful of deliberate shots and a reload you have to survive, not a
+            magazine dump.
+          </li>
+          <li>
+            <strong>Deadeye exists.</strong> Servers handle it very differently, from disabled
+            outright to fully in play. Ask, because it changes combat balance completely.
+          </li>
+          <li>
+            <strong>Carrying capacity is physical.</strong> The base game already models satchels,
+            weight and horse storage, so RedM servers lean into inventory constraint far more than
+            FiveM servers usually do. Hauling anything bulky is a logistics problem.
+          </li>
+          <li>
+            <strong>Interaction is prompt driven.</strong> Red Dead Redemption 2's own prompt and
+            greeting system is used heavily. It feels more diegetic and slower than a FiveM radial
+            menu, which is the point.
+          </li>
+          <li>
+            <strong>Money is small.</strong> Two dollars is a real amount in 1899, and servers that
+            respect that get economies where the numbers mean something. A server where a day's
+            work pays four hundred dollars has thrown that away.
+          </li>
+          <li>
+            <strong>The map is quieter.</strong> Fewer scripted distractions, longer sightlines,
+            and weather that matters. Whether that reads as atmosphere or emptiness depends on how
+            much the server has put into it.
+          </li>
+        </ul>
+      </section>
+
+      <section id="requirements" aria-labelledby="h-requirements">
+        <h2 id="h-requirements">Requirements and performance</h2>
+
+        <p>
+          Red Dead Redemption 2 is the heavier of the two games, and it was heavier at release than
+          Grand Theft Auto V was at its own. A machine comfortable on a busy FiveM server is not
+          automatically comfortable on a busy RedM one.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Disk.</strong> Both games are large, and both clients keep a per-server cache on
+            top. Assume tens of gigabytes for the game and several more for the client and its
+            cached server content.
+          </li>
+          <li>
+            <strong>Graphics settings.</strong> Red Dead Redemption 2's defaults target single
+            player. On a populated server with custom assets, turning down the expensive settings,
+            particularly the volumetric and water options, buys back more than it costs to look at.
+          </li>
+          <li>
+            <strong>Both are Windows only for players.</strong> Servers run on Linux. There is no
+            console version of either, and there is no supported way around that.
+          </li>
+          <li>
+            <strong>Latency hurts more here.</strong> Not because the netcode is worse, but because
+            a horse under load and a slow deliberate gunfight both punish a late correction. If you
+            are in Australia, the main site's guide covers
+            <a href="https://redm.thepub.beer/guides/australian-redm-servers.html#latency" rel="noopener">what distance actually costs you</a>,
+            and <a href="./">this site covers how to measure your own route</a>.
+          </li>
+        </ul>
+      </section>
+
+      <section id="developers" aria-labelledby="h-developers">
+        <h2 id="h-developers">If you build servers: what carries over</h2>
+
+        <p>
+          For a FiveM developer the move is much smaller than it looks from outside.
+        </p>
+
+        <div class="table-wrap bleed">
+          <table class="table">
+            <caption>What a FiveM developer keeps and what they have to relearn.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Carries over</th>
+                <th scope="col">Has to be relearned</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Resource structure, manifests, client and server split</td>
+                <td>The native function set. Different names, different coverage, different gaps</td>
+              </tr>
+              <tr>
+                <td>Lua, JavaScript and C# scripting, and the event model</td>
+                <td>UI and prompt systems, which are Red Dead's own and not GTA's</td>
+              </tr>
+              <tr>
+                <td>Server configuration, resource loading, convars</td>
+                <td>Assets, models, animations and every coordinate on the map</td>
+              </tr>
+              <tr>
+                <td>Database habits, and the same database libraries</td>
+                <td>Framework choice. VORP and RSGCore instead of ESX and QBCore</td>
+              </tr>
+              <tr>
+                <td>Debugging approach, and the same profiling tools</td>
+                <td>Fewer published answers, so more reading of other people's source</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note--warn">
+          <span class="note__title">The trap</span>
+          <p>
+            The similarity is close enough to be misleading. A FiveM script often looks like it
+            should port in an afternoon, and then a native it depends on turns out not to exist on
+            this side, or to exist and quietly do something else. Budget for that discovery on every
+            port rather than being surprised by it each time.
+          </p>
+        </div>
+      </section>
+
+      <section id="choosing" aria-labelledby="h-choosing">
+        <h2 id="h-choosing">Which one should you play</h2>
+
+        <p>
+          Both, if you have the games. They are not competing for the same evening as directly as
+          they look, and plenty of people keep a character in each.
+        </p>
+
+        <p>
+          If you have to pick one:
+        </p>
+
+        <ul class="checklist">
+          <li>
+            <strong>Pick FiveM</strong> if you play in short sessions, you want a large choice of
+            servers, you like modern settings and fast action, or you want to be able to leave and
+            come back to a scene that has not moved without you.
+          </li>
+          <li>
+            <strong>Pick RedM</strong> if you want a slower world where travel and consequence
+            matter, you prefer a smaller community that knows your character, you like trades and
+            economies more than car chases, or you have bounced off FiveM because every server felt
+            like the last one.
+          </li>
+          <li>
+            <strong>Pick neither yet</strong> if you do not own the game. Buying a sixty dollar
+            single player game to try a multiplayer mod is a real decision, and Red Dead Redemption
+            2 is worth playing on its own terms first. Play the story mode. If the world holds you
+            for thirty hours it will hold you on a server.
+          </li>
+        </ul>
+      </section>
+
+      <section id="australia" aria-labelledby="h-australia">
+        <h2 id="h-australia">One more thing if you are in Australia</h2>
+
+        <p>
+          The FiveM scene has established Australian servers and finding one is straightforward. The
+          RedM scene does not, and that is the practical difficulty facing an Australian player
+          considering the switch. Most RedM servers are hosted in North America or Europe, and the
+          pace of the game does not make the latency forgivable in the way people assume.
+        </p>
+
+        <p>
+          Which server to choose is covered on the main site, in
+          <a href="https://redm.thepub.beer/guides/australian-redm-servers.html" rel="noopener">Australian RedM servers</a>.
+          How to measure the route to one before you commit an evening to it is
+          <a href="./">the other guide on this site</a>. If you have not installed the client yet,
+          the <a href="https://redm.thepub.beer/guides/install-redm.html" rel="noopener">install guide</a>
+          is the shorter read.
+        </p>
+
+        <div class="note note--warn">
+          <span class="note__title">Who wrote this</span>
+          <p>
+            This site is published by the people who run
+            <a href="https://redm.thepub.beer/" rel="noopener">The Pub</a>, a free Australian RedM
+            server hosted in Sydney. That is a conflict of interest and this page is
+            written knowing it will be read with one. Nothing above claims The Pub is the best
+            server, because that is not a claim anybody can make on your behalf. The comparison is
+            written so it stays useful if you conclude RedM is not for you at all, which for a lot
+            of FiveM players is the right conclusion.
+          </p>
+        </div>
+      </section>
+
+      <section id="faq" aria-labelledby="h-faq">
+        <h2 id="h-faq">Common questions</h2>
+
+        <div class="faq">
+          <details>
+            <summary>Is RedM the same thing as FiveM?</summary>
+            <p>
+              Separate clients from the same developer, Cfx.re, for two different games. Same idea,
+              same connection model, separate downloads. Owning one gives you nothing towards the
+              other.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use my FiveM scripts on a RedM server?</summary>
+            <p>
+              Not directly. The resource format and the scripting model are shared, so a developer
+              moves across easily, but the natives, the UI systems and every asset are different. A
+              FiveM script is the start of a port, not a drop-in.
+            </p>
+          </details>
+
+          <details>
+            <summary>Which has more players?</summary>
+            <p>
+              FiveM, by a wide margin, and that is unlikely to change. RedM is the smaller,
+              slower scene by nature rather than by accident.
+            </p>
+          </details>
+
+          <details>
+            <summary>Do I need both games?</summary>
+            <p>
+              Yes, one each. FiveM needs a PC copy of Grand Theft Auto V, RedM needs a PC copy of
+              Red Dead Redemption 2. Neither client is a way to play a game you do not own.
+            </p>
+          </details>
+
+          <details>
+            <summary>Will my FiveM roleplay experience help?</summary>
+            <p>
+              A great deal of it. Character consistency, staying in character, valuing your
+              character's life, and the etiquette around scenes are the same skills. What has to
+              adjust is tempo: scenes take longer, and a FiveM habit of resolving things quickly
+              reads as rushing here.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is RedM harder to run?</summary>
+            <p>
+              Generally yes. Red Dead Redemption 2 is the more demanding game before a server's
+              custom content is added on top. A machine that is comfortable on FiveM may need its
+              settings turned down here.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does either one carry more risk to my Rockstar account?</summary>
+            <p>
+              There is no difference between them worth acting on, and neither is a promise anybody
+              other than Rockstar is in a position to make. The main site works through that
+              question at length in
+              <a href="https://redm.thepub.beer/guides/what-is-redm.html" rel="noopener">what RedM is</a>.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="next" aria-labelledby="h-next">
+        <h2 id="h-next">Next</h2>
+        <div class="cards">
+          <div class="panel panel--plain card">
+            <h3>Testing a server's connection</h3>
+            <p>Ping, tracert and pathping on Windows, how to read jitter and packet loss, and how to tell a bad route from a bad server.</p>
+            <a class="btn btn--brass" href="./">Read the testing guide</a>
+          </div>
+          <div class="panel panel--plain card">
+            <h3>Installing RedM</h3>
+            <p>Prerequisites, the first run patch, where the files live and the errors that stop most first installs. Covered on the main site rather than repeated here.</p>
+            <a class="btn" href="https://redm.thepub.beer/guides/install-redm.html" rel="noopener">Read the install guide</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <p class="label">Guides</p>
+        <ul>
+          <li><a href="./">Testing a RedM server's connection</a></li>
+          <li><a href="redm-vs-fivem.html">RedM vs FiveM</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">On this page</p>
+        <ul>
+          <li><a href="#short">The short answer</a></li>
+          <li><a href="#pace">Pace</a></li>
+          <li><a href="#ecosystem">Ecosystem size</a></li>
+          <li><a href="#mechanics">Mechanical differences</a></li>
+          <li><a href="#developers">For developers</a></li>
+          <li><a href="#faq">Common questions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">About</p>
+        <ul>
+          <li>Published by <a href="https://redm.thepub.beer/" rel="noopener">The Pub</a>, an Australian RedM server</li>
+          <li>Last checked 11 August 2026</li>
+        </ul>
+      </div>
+    </div>
+    <p class="site-footer__legal">
+      Red Dead Redemption 2 and Grand Theft Auto V are trademarks of Take-Two Interactive and
+      Rockstar Games. RedM and FiveM are projects of Cfx.re. This site is an independent guide and
+      is not affiliated with, endorsed by or sponsored by Rockstar Games, Take-Two Interactive or
+      Cfx.re. Corrections are welcome.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

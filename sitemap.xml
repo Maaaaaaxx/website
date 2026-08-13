@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  maaaaaaxx.github.io/Website
+
+  Two pages, both long-form and both written to stand on their own. There
+  was a third, an install guide, and it was removed because redm.thepub.beer
+  publishes one covering the same ground: two hosts carrying the same article
+  compete with each other and one of them loses. Priorities are relative
+  within this site only.
+
+  The host in every <loc> must match the GitHub Pages URL exactly, including
+  the trailing slash on the index and the capital W in /Website/. A project
+  page's path is case sensitive: /website/ is a 404 on the same repository.
+  If this site ever moves to a custom domain, this file, the canonical tag on
+  both pages and the Sitemap line in robots.txt all change together, or
+  Search Console reports the sitemap as containing URLs on a different host
+  and ignores it.
+
+  Submit at https://search.google.com/search-console for the github.io
+  property, and at Bing Webmaster Tools.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://maaaaaaxx.github.io/Website/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://maaaaaaxx.github.io/Website/redm-vs-fivem.html</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>

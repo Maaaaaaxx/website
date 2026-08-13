@@ -1,0 +1,638 @@
+/* ────────────────────────────────────────────────────────────────────
+   GENERATED COPY. Do not edit.
+   Source: web/shared/css/theme.css
+   Regenerate: node web/shared/sync-theme.js
+   ──────────────────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════════
+   The Pub - shared WEB theme
+   ══════════════════════════════════════════════════════════════════════════
+
+   This is the canonical stylesheet for thepub.beer, the RedM saloon site and
+   the RedM staff panel. It is the same design system as the in-game NUI theme
+   at resources/[pub]/pub_banking/ui/css/theme.css, with the three differences
+   a document needs and a game overlay does not:
+
+     1. the body has a real background, because there is no game behind it
+     2. the page scrolls
+     3. text is selectable, because people copy join instructions
+
+   Do not edit the copies. Edit this file and run `node web/shared/sync-theme.js`,
+   which stamps it into every site. A copy that has drifted is a bug that only
+   shows up on one page, which is exactly the kind nobody finds.
+
+   ── Sizing: read this before adding a px anywhere ─────────────────────────
+
+   Nothing here is sized in pixels. A page drawn in pixels is drawn for one
+   monitor: correct at 1080p, cramped at 1440p, postage-stamp at 4K. The root
+   font size tracks the viewport instead, and every size is in rem, so one
+   value scales the whole site.
+
+     html { font-size: clamp(9px, calc(0.41667vw + 0.74074vh), 48px) }
+
+   The vw and vh terms are weighted to contribute equally at 16:9, which keeps
+   an ultrawide from inflating the page to the width of the screen while
+   leaving it too tall for the height.
+
+     1280 x  720  ->  10.7  (0.67x)
+     1920 x 1080  ->  16.0  (1.00x, what everything was drawn at)
+     2560 x 1440  ->  21.3  (1.33x)
+     3440 x 1440  ->  25.0  (ultrawide, not the 28.7 pure vw would give)
+     3840 x 2160  ->  32.0  (2.00x)
+
+   The only fair uses of px are inside @media queries and blur() radii.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+html {
+  font-size: clamp(9px, calc(0.41667vw + 0.74074vh), 48px);
+}
+
+/* A phone is not a small desktop. Below 700px the viewport is so narrow that
+   the vw term starves the root size, and body copy falls under the size a
+   thumb can read. Lean on vh there instead so the page stays legible. */
+@media (max-width: 700px) {
+  html { font-size: clamp(13px, calc(2.6vw + 0.4vh), 20px); }
+}
+
+:root {
+  /* ── Scale ──────────────────────────────────────────────────────────── */
+  /* A hairline that stays visible on a 4K panel without going chunky on a
+     720p one. max() rather than a flat 1px: at a 32-unit root, 0.0625rem is
+     two device pixels, which is what a 1px rule looks like at 1080p. */
+  --hair:  max(1px, 0.0625rem);
+  --hair2: max(2px, 0.125rem);
+
+  /* Spacing ladder. Every margin, gap and padding comes from here, so nothing
+     is ever nudged by an arbitrary number of pixels. */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;   /* web only: section rhythm, a game menu never needs it */
+
+  /* ── Ink and paper ──────────────────────────────────────────────────── */
+  --paper:          #d9cdb4;
+  --paper-dim:      #c4b79c;
+  --paper-deep:     #a8997d;
+
+  --ink:            #12100d;   /* near-black, never #000 */
+  --ink-soft:       #1c1915;
+  --ink-veil:       rgba(12, 10, 8, 0.88);
+  --ink-veil-light: rgba(12, 10, 8, 0.62);
+
+  --cream:          #efe6d2;
+  --cream-dim:      #b9ae97;
+  --cream-faint:    #7d7461;
+
+  /* ── Accents ────────────────────────────────────────────────────────── */
+  --gold:           #c9a227;
+  --gold-bright:    #e8c65a;
+  --gold-deep:      #8a6d18;
+
+  --blood:          #8e2420;
+  --blood-bright:   #c0392b;
+
+  --moss:           #5c6b3f;
+  --moss-bright:    #7d9155;
+
+  --slate:          #4a5560;
+
+  /* ── Currency, matched to the HUD so a number means the same thing on the
+     site as it does in a player's pocket ───────────────────────────────── */
+  --cur-cash:       #8fa06b;
+  --cur-bank:       #7c9bb5;
+  --cur-gold:       #d4af37;
+  --cur-platinum:   #cfd6dc;
+
+  /* ── Saloon extras: web only ────────────────────────────────────────────
+     The in-game menus float over a rendered world that already supplies wood
+     and lamplight. A web page has nothing behind it, so the timber and the
+     brass have to be drawn. */
+  --wood-dark:      #241a11;
+  --wood:           #35251705;   /* deliberately faint, layered over ink */
+  --wood-warm:      #4a3320;
+  --brass:          #b08d3f;
+  --brass-dark:     #6d5520;
+  --lamp:           #ffcf7a;     /* the glow, never a fill */
+  --whiskey:        #a4552a;
+
+  /* ── Type ───────────────────────────────────────────────────────────── */
+  /* Rockstar's faces are not licensable and a web font is a third-party
+     request on every page load, so this stack picks the closest condensed
+     serif already installed, then degrades. */
+  --font-display: "Adobe Caslon Pro", "Playfair Display", "Bookman Old Style",
+                  "Baskerville Old Face", "Georgia", "Times New Roman", serif;
+  --font-body:    "Ebrima", "Segoe UI", "Gill Sans MT", "Optima", sans-serif;
+  --font-numeric: "Consolas", "Courier New", monospace;
+
+  /* Type scale in rem so it rides the root size. The comments are the px
+     equivalents at 1080p. */
+  --fs-hero:   2.375rem;   /* 38 */
+  --fs-title:  1.5625rem;  /* 25 */
+  --fs-head:   1.125rem;   /* 18 */
+  --fs-body:   0.9375rem;  /* 15 */
+  --fs-small:  0.8125rem;  /* 13 */
+  --fs-micro:  0.6875rem;  /* 11 */
+  /* Web only. A landing page carries one word bigger than any menu ever does. */
+  --fs-mega:   4.25rem;
+
+  --tracking-wide: 0.16em;
+  --tracking-mid:  0.08em;
+
+  /* ── Structure ──────────────────────────────────────────────────────── */
+  --rule:        var(--hair) solid rgba(201, 162, 39, 0.42);
+  --rule-faint:  var(--hair) solid rgba(201, 162, 39, 0.18);
+  --rule-heavy:  var(--hair2) solid rgba(201, 162, 39, 0.55);
+
+  --shadow-panel: 0 1.125rem 3.75rem rgba(0, 0, 0, 0.75);
+  --shadow-inset: inset 0 0 5.625rem rgba(0, 0, 0, 0.55);
+  --shadow-lamp:  0 0 2.5rem rgba(255, 207, 122, 0.16);
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --measure: 42rem;   /* comfortable reading column for the long-form guides */
+}
+
+/* ── Reset ────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--ink);
+  font-family: var(--font-body);
+  color: var(--cream);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--gold-bright); text-decoration: none; }
+a:hover { color: var(--lamp); text-decoration: underline; }
+
+:focus-visible {
+  outline: var(--hair2) solid var(--gold-bright);
+  outline-offset: 0.125rem;
+}
+
+/* Anything a keyboard can reach must announce itself, but people who click
+   should not see a ring on every button they press. */
+:focus:not(:focus-visible) { outline: none; }
+
+/* ── Boards: the timber a saloon is built from ─────────────────────────────
+   Repeating linear gradients rather than a photograph. A tiled JPEG of wood
+   costs 200KB and tiles visibly; this costs nothing and never seams. */
+
+.boards {
+  background-color: var(--wood-dark);
+  background-image:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,0.32) 0rem, rgba(0,0,0,0) 0.07rem,
+      rgba(255,255,255,0.014) 0.5rem, rgba(0,0,0,0) 1.9rem),
+    repeating-linear-gradient(0deg,
+      rgba(0,0,0,0.5) 0rem, rgba(0,0,0,0.5) 0.09rem,
+      rgba(0,0,0,0) 0.09rem, rgba(0,0,0,0) 7.5rem),
+    linear-gradient(178deg, #2b1e14 0%, #1a120c 55%, #241910 100%);
+}
+
+/* ── Grain ────────────────────────────────────────────────────────────────
+   A film-grain overlay sells the period look more than any other single
+   detail. Inline SVG turbulence, so there is no image to ship. */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter>\
+<rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 59;
+  background: radial-gradient(ellipse at center,
+              rgba(0,0,0,0) 42%, rgba(0,0,0,0.62) 100%);
+}
+
+/* ── Panels ───────────────────────────────────────────────────────────── */
+
+.panel {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(28,25,21,0.96) 0%, rgba(14,12,10,0.97) 100%);
+  border: var(--rule);
+  box-shadow: var(--shadow-panel), var(--shadow-inset);
+}
+
+/* Ornamental corner ticks, drawn rather than shipped as images. */
+.panel::before,
+.panel::after {
+  content: "";
+  position: absolute;
+  width: 0.875rem; height: 0.875rem;
+  border-color: var(--gold);
+  opacity: 0.75;
+  pointer-events: none;
+}
+.panel::before {
+  top: 0.25rem; left: 0.25rem;
+  border-top: var(--hair2) solid; border-left: var(--hair2) solid;
+}
+.panel::after {
+  bottom: 0.25rem; right: 0.25rem;
+  border-bottom: var(--hair2) solid; border-right: var(--hair2) solid;
+}
+
+.panel--paper {
+  background:
+    linear-gradient(180deg, rgba(217,205,180,0.97), rgba(196,183,156,0.97));
+  color: var(--ink);
+}
+.panel--paper a { color: #6b4a12; }
+
+/* A flat panel with no corner ticks, for grids where forty of them would be
+   forty times too much ornament. */
+.panel--plain::before,
+.panel--plain::after { content: none; }
+
+/* ── Headings ─────────────────────────────────────────────────────────── */
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  letter-spacing: var(--tracking-mid);
+  color: var(--cream);
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 var(--hair2) 0.375rem rgba(0,0,0,0.9);
+}
+
+.title--hero { font-size: var(--fs-hero); }
+.title--mega { font-size: var(--fs-mega); line-height: 0.95; }
+
+.subtitle {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  margin: 0.25rem 0 0;
+}
+
+/* Letterpress: the display type on a saloon sign is stamped into the board,
+   not printed on it. A light top edge and a dark bottom shadow is the whole
+   trick. */
+.letterpress {
+  color: var(--paper);
+  text-shadow:
+    0 calc(-1 * var(--hair)) 0 rgba(255, 240, 210, 0.22),
+    0 var(--hair) 0 rgba(0, 0, 0, 0.85),
+    0 0.25rem 0.75rem rgba(0, 0, 0, 0.8);
+}
+
+/* A rule with a diamond in the middle, the way the game breaks up sections. */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: var(--hair);
+  background: linear-gradient(90deg,
+    transparent, rgba(201,162,39,0.45), transparent);
+}
+.divider__mark {
+  width: 0.375rem; height: 0.375rem;
+  transform: rotate(45deg);
+  background: var(--gold);
+  opacity: 0.8;
+  flex: none;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  color: var(--cream);
+  background: rgba(40, 35, 28, 0.9);
+  border: var(--rule-faint);
+  padding: 0.5625rem 1.125rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 140ms var(--ease),
+              color 140ms var(--ease),
+              border-color 140ms var(--ease);
+}
+
+.btn:hover {
+  background: rgba(201, 162, 39, 0.16);
+  border-color: var(--gold);
+  color: var(--gold-bright);
+  text-decoration: none;
+}
+
+.btn:active { transform: translateY(var(--hair)); }
+
+.btn--primary {
+  background: rgba(92, 107, 63, 0.22);
+  border-color: rgba(125, 145, 85, 0.6);
+  color: #d8e3c2;
+}
+.btn--primary:hover {
+  background: rgba(125, 145, 85, 0.34);
+  border-color: var(--moss-bright);
+  color: #eef4e2;
+}
+
+.btn--danger {
+  background: rgba(142, 36, 32, 0.2);
+  border-color: rgba(192, 57, 43, 0.55);
+  color: #f0c9c5;
+}
+.btn--danger:hover {
+  background: rgba(192, 57, 43, 0.34);
+  border-color: var(--blood-bright);
+  color: #ffe2de;
+}
+
+.btn--brass {
+  background: linear-gradient(180deg, rgba(176,141,63,0.30), rgba(109,85,32,0.30));
+  border-color: var(--brass);
+  color: #f4e3b8;
+}
+.btn--brass:hover {
+  background: linear-gradient(180deg, rgba(176,141,63,0.5), rgba(109,85,32,0.5));
+  border-color: var(--gold-bright);
+  color: #fff3d2;
+}
+
+.btn--big { font-size: var(--fs-head); padding: 0.875rem 2rem; }
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────── */
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: var(--rule-faint);
+  overflow-x: auto;
+}
+
+.tab {
+  flex: 1 0 auto;
+  text-align: center;
+  padding: 0.6875rem 0.75rem;
+  font-size: var(--fs-small);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  border-bottom: var(--hair2) solid transparent;
+  font-family: inherit;
+  transition: color 140ms var(--ease), border-color 140ms var(--ease);
+}
+
+.tab:hover { color: var(--cream-dim); }
+
+.tab.is-active {
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold);
+}
+
+/* ── Rows ─────────────────────────────────────────────────────────────── */
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.625rem;
+  padding: 0.5625rem 0.75rem;
+  border-bottom: var(--rule-faint);
+  transition: background 120ms var(--ease);
+}
+
+.row:hover     { background: rgba(201, 162, 39, 0.07); }
+.row.is-active { background: rgba(201, 162, 39, 0.13); }
+
+.row__label {
+  font-size: var(--fs-small);
+  letter-spacing: 0.04em;
+  color: var(--cream-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row.is-active .row__label { color: var(--cream); }
+
+/* ── Forms ────────────────────────────────────────────────────────────── */
+
+.field {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  color: var(--cream);
+  background: rgba(0, 0, 0, 0.4);
+  border: var(--rule-faint);
+  padding: 0.5rem 0.625rem;
+  width: 100%;
+  transition: border-color 140ms var(--ease);
+}
+.field:hover  { border-color: rgba(201, 162, 39, 0.34); }
+.field:focus  { border-color: var(--gold); outline: none; }
+.field::placeholder { color: var(--cream-faint); }
+
+select.field  { cursor: pointer; }
+textarea.field { resize: vertical; min-height: 4rem; line-height: 1.5; }
+
+.label {
+  display: block;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  margin-bottom: 0.25rem;
+}
+
+/* ── Currency ─────────────────────────────────────────────────────────── */
+
+.coin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3125rem;
+  font-family: var(--font-numeric);
+  font-size: var(--fs-small);
+}
+.coin--cash     { color: var(--cur-cash); }
+.coin--bank     { color: var(--cur-bank); }
+.coin--gold     { color: var(--cur-gold); }
+.coin--platinum { color: var(--cur-platinum); }
+
+.coin__mark {
+  width: 0.5rem; height: 0.5rem;
+  transform: rotate(45deg);
+  background: currentColor;
+  opacity: 0.85;
+  flex: none;
+}
+
+/* ── Tables ───────────────────────────────────────────────────────────── */
+
+.table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+
+.table th {
+  text-align: left;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  font-weight: normal;
+  padding: 0.5rem 0.625rem;
+  border-bottom: var(--rule);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.5rem 0.625rem;
+  border-bottom: var(--rule-faint);
+  color: var(--cream-dim);
+  vertical-align: middle;
+}
+
+.table tbody tr:hover td { background: rgba(201, 162, 39, 0.06); color: var(--cream); }
+
+.table__num { font-family: var(--font-numeric); text-align: right; }
+
+/* A table is the one thing that cannot be made narrow enough for a phone, so
+   it gets its own scroller rather than pushing the page sideways. */
+.table-wrap { overflow-x: auto; }
+
+/* ── Tags ─────────────────────────────────────────────────────────────── */
+
+.tag {
+  display: inline-block;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-mid);
+  text-transform: uppercase;
+  padding: 0.125rem 0.4375rem;
+  border: var(--hair) solid currentColor;
+  white-space: nowrap;
+}
+.tag--good   { color: var(--moss-bright); }
+.tag--bad    { color: var(--blood-bright); }
+.tag--warn   { color: var(--gold-bright); }
+.tag--law    { color: #8fa6bd; }
+.tag--quiet  { color: var(--cream-faint); }
+
+/* ── Scrollbars ───────────────────────────────────────────────────────── */
+
+.scroll { overflow-y: auto; overflow-x: hidden; }
+.scroll::-webkit-scrollbar { width: 0.3125rem; height: 0.3125rem; }
+.scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.35); }
+.scroll::-webkit-scrollbar-thumb { background: rgba(201,162,39,0.35); }
+.scroll::-webkit-scrollbar-thumb:hover { background: rgba(201,162,39,0.6); }
+
+/* ── Utility ──────────────────────────────────────────────────────────── */
+
+.muted   { color: var(--cream-faint); }
+.center  { text-align: center; }
+.hidden  { display: none !important; }
+.mono    { font-family: var(--font-numeric); }
+.nowrap  { white-space: nowrap; }
+
+.stack   { display: flex; flex-direction: column; gap: var(--sp-4); }
+.cluster { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; }
+
+.wrap {
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+.wrap--narrow { max-width: var(--measure); }
+
+/* Visible to a screen reader, invisible to everyone else. Used for the
+   heading structure the SEO work depends on. */
+.sr-only {
+  position: absolute;
+  width: var(--hair); height: var(--hair);
+  padding: 0; margin: calc(-1 * var(--hair));
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--sp-4);
+  top: calc(-1 * var(--sp-8));
+  z-index: 100;
+  background: var(--ink);
+  border: var(--rule);
+  padding: var(--sp-2) var(--sp-4);
+  transition: top 140ms var(--ease);
+}
+.skip-link:focus { top: var(--sp-4); }
+
+.fade-in { animation: fadeIn 320ms var(--ease) both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.rise-in { animation: riseIn 380ms var(--ease) both; }
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(0.625rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect people who get motion sick; everything still works without it. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print: someone will print the rules page and pin it to a Discord. Make that
+   readable rather than a black rectangle that empties a toner cartridge. */
+@media print {
+  body { background: #fff; color: #000; }
+  .grain, .vignette, .no-print { display: none !important; }
+  .panel { box-shadow: none; border: 1px solid #999; background: #fff; color: #000; }
+  a::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+}

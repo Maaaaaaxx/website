@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>How to test a RedM server's connection from Australia</title>
+<meta name="description" content="How to measure your own route to a RedM server before you spend a month on a character: ping, tracert and pathping on Windows, how to read jitter and packet loss, what the in-client number does and does not tell you, and how to tell a bad route from a bad server.">
+<link rel="canonical" href="https://maaaaaaxx.github.io/Website/">
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="The Pub RedM">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Australian RedM Guides">
+<meta property="og:locale" content="en_AU">
+<meta property="og:title" content="How to test a RedM server's connection from Australia">
+<meta property="og:description" content="Ping, tracert and pathping on Windows, how to read jitter and packet loss, and how to tell a bad route from a bad server.">
+<meta property="og:url" content="https://maaaaaaxx.github.io/Website/">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Testing a RedM server's connection from Australia">
+<meta name="twitter:description" content="How to get a reading you can trust before you commit an evening, using the tools already on a Windows PC.">
+
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/satellite.css">
+
+<!-- The entity relationship this file asserts, and the one it deliberately
+     does not.
+
+     This site is published BY The Pub and is ABOUT RedM. It is not The Pub's
+     own site. So the Organization is named by the identifier the real site
+     already declares, https://redm.thepub.beer/#org, with its url left
+     pointing at that host, and the satellite gets its own WebSite node on its
+     own github.io URL, published by that Organization. What is not said
+     anywhere is that this WebSite is part of https://redm.thepub.beer/#website
+     or that the Organization's url is this host. Either would collapse two
+     separate sites into one entity and throw away the only thing this site
+     has, which is being somewhere else. The server is a mention here, not the
+     subject. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://redm.thepub.beer/#org",
+      "name": "The Pub RedM",
+      "alternateName": "The Pub",
+      "url": "https://redm.thepub.beer/",
+      "parentOrganization": { "@id": "https://thepub.beer/#org" }
+    },
+    {
+      "@type": "VideoGame",
+      "@id": "https://redm.thepub.beer/#server",
+      "name": "The Pub",
+      "url": "https://redm.thepub.beer/",
+      "publisher": { "@id": "https://redm.thepub.beer/#org" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://maaaaaaxx.github.io/Website/#website",
+      "url": "https://maaaaaaxx.github.io/Website/",
+      "name": "Australian RedM Guides",
+      "description": "Two long-form guides to RedM for Australian and New Zealand players, published by The Pub and written to be useful independently of it.",
+      "inLanguage": "en-AU",
+      "publisher": { "@id": "https://redm.thepub.beer/#org" }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://maaaaaaxx.github.io/Website/#article",
+      "headline": "How to test a RedM server's connection from Australia",
+      "description": "How to measure your own route to a RedM server before committing to a character: ping, tracert and pathping on Windows, reading jitter and packet loss, what the in-client number means, and how to tell a bad route from a bad server.",
+      "inLanguage": "en-AU",
+      "datePublished": "2026-08-13",
+      "dateModified": "2026-08-13",
+      "url": "https://maaaaaaxx.github.io/Website/",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://maaaaaaxx.github.io/Website/" },
+      "isPartOf": { "@id": "https://maaaaaaxx.github.io/Website/#website" },
+      "author": { "@id": "https://redm.thepub.beer/#org" },
+      "publisher": { "@id": "https://redm.thepub.beer/#org" },
+      "about": [
+        { "@type": "Thing", "name": "RedM" },
+        { "@type": "Thing", "name": "Network latency" },
+        { "@type": "VideoGame", "name": "Red Dead Redemption 2" }
+      ],
+      "mentions": [
+        { "@id": "https://redm.thepub.beer/#org" },
+        { "@id": "https://redm.thepub.beer/#server" }
+      ],
+      "contentLocation": { "@type": "Country", "name": "Australia" },
+      "keywords": "RedM ping, RedM server Australia, test ping to game server, tracert, pathping, jitter, packet loss, RedM roleplay"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Testing a RedM server's connection", "item": "https://maaaaaaxx.github.io/Website/" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the ping in the RedM server browser the same as the ping in game?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily. The browser figure is a single estimate taken from outside the session, and it is measured against the server's listing rather than against a running game. The figure a server shows you once you are connected, in its own HUD or player list, is measured on the connection you are actually playing on. Where the two disagree, believe the one taken while you are in the world, and take several readings rather than one." }
+    },
+    {
+      "@type": "Question",
+      "name": "My ping is low and the game still feels late. Why?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ping measures the trip. It says nothing about how long the server takes to think once your message arrives. A server that is overloaded, or running a script that stalls the frame, feels late at any ping, and the giveaway is that it feels late for the local players too. Ask in the server's Discord whether others are seeing it at the same time. If everybody is, the number on your screen is not the problem." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will a VPN lower my ping to an overseas RedM server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Usually not. A VPN adds a stop on the way, and physical distance still sets the floor, so the normal result is the same route with extra milliseconds. The exception is a genuinely bad route, where your ISP hands traffic off badly and a VPN happens to take a better path. That is worth testing rather than assuming: measure without it, measure with it, at the same hour, and keep whichever reading is better." }
+    },
+    {
+      "@type": "Question",
+      "name": "The server does not answer ping at all. Is that a bad sign?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Plenty of hosts filter ICMP, which is what ping and tracert use, while the game port answers normally. A row of timeouts tells you the box will not talk to that particular tool, not that it is unreachable or badly run. When that happens, skip to measuring inside the game." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should I test for before trusting the number?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Long enough to catch a spike. Four packets is not a measurement. Run at least a hundred, which is roughly a hundred seconds, and do it once in the evening peak between about 7 pm and 11 pm local time and once outside it. The difference between those two readings tells you more about your evenings than either reading does on its own." }
+    },
+    {
+      "@type": "Question",
+      "name": "My ping is worse in town than out in the wilderness. Is that the route?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Rarely. Your route does not change because your character walked into Valentine. What changes is how much the server is doing: more players, more entities and more scripts in one place. If a reading taken standing in a busy town is much worse than one taken alone on a ridge, that is a server load pattern rather than a network one, and it will show up for everybody in that town." }
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="boards">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="./">
+      <span class="brand__name">Australian RedM Guides</span>
+      <span class="brand__note">Published by The Pub, written to stand on their own</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="./" aria-current="page">Testing a server</a>
+      <a href="redm-vs-fivem.html">RedM vs FiveM</a>
+    </nav>
+  </div>
+  <!-- The publisher, in the chrome rather than buried in the prose. The
+       disclosure is the whole basis on which this site is honest, so a reader
+       should be able to see who wrote it from any screenful, not only from
+       the one section that admits it. -->
+  <div class="wrap">
+    <p class="site-header__by">
+      Published by <a href="https://redm.thepub.beer/" rel="noopener">The Pub</a>, a free
+      Australian RedM server hosted in Sydney. Read the
+      <a href="#disclosure">disclosure</a> before you weigh anything here.
+    </p>
+  </div>
+</header>
+
+<main id="main">
+  <article class="wrap">
+
+    <div class="masthead">
+      <h1>How to test a RedM server's connection from Australia</h1>
+      <p class="standfirst">
+        Everybody knows to check the ping. Almost nobody checks it properly, and the number most
+        people quote is four packets taken once, at lunchtime, against a box that may not be
+        answering honestly. This page is about getting a reading you can act on, using the tools
+        already installed on a Windows PC, before you spend a month on a character.
+      </p>
+      <div class="byline">
+        <span>Published 13 August 2026</span>
+        <span>Last checked 13 August 2026</span>
+        <span>Written for PC players in Australia and New Zealand</span>
+      </div>
+    </div>
+
+    <div class="prose">
+
+      <section id="why" aria-labelledby="h-why">
+        <h2 id="h-why">What you are actually trying to find out</h2>
+
+        <p>
+          Three separate things get called "the ping", and they fail in different ways. Keeping them
+          apart is most of the skill here.
+        </p>
+
+        <ul>
+          <li>
+            <strong>The average.</strong> How long a message takes to reach the server and come back.
+            Distance sets the floor and nothing you can buy moves it, because the speed of light
+            through glass is not negotiable.
+          </li>
+          <li>
+            <strong>The variation, or jitter.</strong> How much that figure moves around between one
+            message and the next. A steady 200 is a better evening than a 90 that jumps to 400 twice
+            a minute, because the game can hide a delay it can predict and cannot hide one it
+            cannot.
+          </li>
+          <li>
+            <strong>The loss.</strong> How often a message never arrives. This is the one that reads
+            as rubber banding, as being shot through a wall, and as a horse that snaps back to where
+            it was two seconds ago. A route with one per cent loss ruins evenings that a route with
+            eighty extra milliseconds would not.
+          </li>
+        </ul>
+
+        <p>
+          A four packet ping tells you about the first of those and nothing about the other two,
+          which is why it is the wrong test to run and the only one most people run.
+        </p>
+
+        <div class="note">
+          <span class="note__title">What this page does not cover</span>
+          <p>
+            Which server to pick, what a given ping feels like to play at, and how to judge a
+            roleplay community are covered properly on the main site, in
+            <a href="https://redm.thepub.beer/guides/australian-redm-servers.html" rel="noopener">Australian RedM servers</a>.
+            There is no point in two hosts printing the same article, so this one stays on the
+            measuring.
+          </p>
+        </div>
+      </section>
+
+      <section id="tools" aria-labelledby="h-tools">
+        <h2 id="h-tools">The three commands, and what each is for</h2>
+
+        <p>
+          All three ship with Windows. Open Start, type <code>cmd</code>, and run them there. You
+          need the server's connect address first, which is usually published in its Discord. A
+          hostname works as well as an IP address.
+        </p>
+
+        <h3>1. A long ping, for the average and the loss</h3>
+
+        <pre><code>ping -n 100 your.server.address</code></pre>
+
+        <p>
+          The <code>-n 100</code> is the whole point. It sends a hundred packets, about a hundred
+          seconds of it, and prints minimum, maximum and average at the end along with how many were
+          lost. The default of four packets can miss a spike that happens every thirty seconds, and
+          that spike is the thing you are looking for.
+        </p>
+
+        <p>
+          Read the gap between minimum and maximum, not the average alone. Minimum 182, maximum 191
+          is a stable route to a distant place. Minimum 42, maximum 380 is a local server behind
+          something broken between you and the modem.
+        </p>
+
+        <h3>2. A traceroute, for where the box actually is</h3>
+
+        <pre><code>tracert your.server.address</code></pre>
+
+        <p>
+          This lists every router between you and the server. The useful part is the names: hop names
+          usually carry airport or city codes, so a route that runs through <code>syd</code> and
+          stops there is in Sydney, and one that passes <code>syd</code> then <code>lax</code> or
+          <code>sjc</code> has left the country. Watch for the jump where the round trip figure adds
+          a hundred milliseconds at once. That is the ocean.
+        </p>
+
+        <p>
+          This matters because a server tagged AU in the client's list may be renting a box in Los
+          Angeles, and the route is harder to misrepresent than a tag is. Add <code>-d</code> if you
+          want it to finish faster, though that turns off the names that make it worth running.
+        </p>
+
+        <h3>3. Pathping, for which hop is dropping packets</h3>
+
+        <pre><code>pathping your.server.address</code></pre>
+
+        <p>
+          Slow, several minutes on a long route, and the only one of the three that tells you where
+          the loss is. It walks the route, sends a batch of packets to each hop in turn, and prints a
+          per hop loss percentage. If loss appears at hop three and continues to the end, the problem
+          is three hops away from you and is almost certainly your ISP's to fix. If it appears only
+          at the last line, it is at the far end.
+        </p>
+
+        <div class="note note--warn">
+          <span class="note__title">Read the middle of a traceroute loosely</span>
+          <p>
+            Routers treat ping traffic as the lowest priority work they have, so a middle hop showing
+            forty per cent loss or a wild time while everything after it is clean is normal and means
+            nothing. Only the last line, the server itself, is worth taking seriously. This one
+            misreading sends more people chasing imaginary faults than any other.
+          </p>
+        </div>
+      </section>
+
+      <section id="reading" aria-labelledby="h-reading">
+        <h2 id="h-reading">Reading the result</h2>
+
+        <p>
+          Six readings cover nearly everything you will see. The right hand column is the next thing
+          to do, not a verdict.
+        </p>
+
+        <div class="table-wrap bleed">
+          <table class="table">
+            <caption>Interpreting a hundred packet ping and a traceroute against a game server.</caption>
+            <thead>
+              <tr>
+                <th scope="col">What you see</th>
+                <th scope="col">What it usually means</th>
+                <th scope="col">What to do next</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Average 45, maximum 55, no loss</th>
+                <td>A short, clean route. The floor is set by distance and there is nothing in the way.</td>
+                <td>Nothing. Go and play.</td>
+              </tr>
+              <tr>
+                <th scope="row">Average 190, maximum 205, no loss</th>
+                <td>Far away but steady. Predictable delay is the kind the game handles best.</td>
+                <td>Decide whether you want that distance, then test it in a gunfight rather than on paper.</td>
+              </tr>
+              <tr>
+                <th scope="row">Average 60, maximum 400, no loss</th>
+                <td>Jitter, and at that average it is almost certainly at your end or in your street.</td>
+                <td>Test wired instead of wireless, stop any download, and run it again at a quiet hour.</td>
+              </tr>
+              <tr>
+                <th scope="row">One to three per cent loss, steady, at the last hop</th>
+                <td>A real fault on the route or at the far end. Small numbers here cause large problems.</td>
+                <td>Ping something else well known to see whether it is only this server, then run pathping.</td>
+              </tr>
+              <tr>
+                <th scope="row">Heavy loss at a middle hop, clean at the end</th>
+                <td>A router deprioritising ping traffic. Not a fault.</td>
+                <td>Ignore it entirely.</td>
+              </tr>
+              <tr>
+                <th scope="row">Every packet times out, but the game connects</th>
+                <td>ICMP is filtered at the host. Common, and says nothing about the server.</td>
+                <td>Measure inside the game instead, as below.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="in-game" aria-labelledby="h-in-game">
+        <h2 id="h-in-game">Measuring inside the game, which is the reading that counts</h2>
+
+        <p>
+          Everything above measures a route. It does not measure the server's own load, and the two
+          fail independently. A box can sit eight milliseconds from you and still answer late,
+          because how long a server takes to think once your message lands is not a network question
+          at all.
+        </p>
+
+        <ol>
+          <li>
+            <strong>Ignore the first few minutes.</strong> Your first join to any server downloads
+            its resources, so the client is busy in a way it will never be again. Any reading taken
+            during that is worthless.
+          </li>
+          <li>
+            <strong>Use the figure the server shows you, not the browser's.</strong> Most servers
+            display a ping in their own HUD or player list. That one is measured on the session you
+            are actually in.
+          </li>
+          <li>
+            <strong>Take it twice, in different places.</strong> Once standing alone somewhere quiet,
+            once in the busiest town at a busy hour. A large gap between the two is server load, and
+            it is the thing that ruins an evening on paper-perfect latency.
+          </li>
+          <li>
+            <strong>Test the thing you care about.</strong> A gunfight, or any minigame with a moving
+            window, tells you in thirty seconds what an hour of pinging cannot. The window closes on
+            server time, so distance shows up there first.
+          </li>
+          <li>
+            <strong>Go back at 8 pm on a Wednesday.</strong> Both the route and the server behave
+            differently under load, and the evening peak is when you will actually be playing.
+          </li>
+        </ol>
+      </section>
+
+      <section id="your-end" aria-labelledby="h-your-end">
+        <h2 id="h-your-end">Ruling out your own end first</h2>
+
+        <p>
+          Before blaming a server, spend five minutes proving the problem is not in your house. In
+          rough order of how often each one turns out to be the answer:
+        </p>
+
+        <ul class="checklist">
+          <li>
+            <strong>Wireless.</strong> Wifi adds variation even when it looks fine, and variation is
+            the expensive kind of problem. Test once on a cable. If the jitter disappears, you have
+            your answer.
+          </li>
+          <li>
+            <strong>Something else using the connection.</strong> A console updating in another room
+            will not change your average much and will wreck your maximum.
+          </li>
+          <li>
+            <strong>The evening peak.</strong> Congestion between roughly 7 pm and 11 pm is a normal
+            property of a residential connection. Compare a reading then against one at lunchtime.
+          </li>
+          <li>
+            <strong>Powerline adapters and old cabling.</strong> Both produce exactly the pattern of
+            occasional loss that is hardest to attribute, because everything else looks fine.
+          </li>
+          <li>
+            <strong>A VPN you forgot was running.</strong> Worth checking before you conclude anything
+            about a route.
+          </li>
+        </ul>
+
+        <p>
+          A useful control is to ping a well known address that is definitely close to you and one
+          that is definitely far away, in the same sitting. If both look bad, the server was never
+          the problem.
+        </p>
+      </section>
+
+      <section id="disclosure" aria-labelledby="h-disclosure">
+        <h2 id="h-disclosure">Disclosure, and running these checks on us</h2>
+
+        <div class="note note--warn">
+          <span class="note__title">Who wrote this</span>
+          <p>
+            This guide is published by the people who run
+            <a href="https://redm.thepub.beer/" rel="noopener">The Pub</a>, an Australian RedM
+            server. That is a conflict of interest and you should read the page with it in mind.
+            Every check on this page works against our server exactly as it works against anybody
+            else's, which is the only reason it is worth publishing under our name.
+          </p>
+        </div>
+
+        <p>
+          The checkable facts, so you can hold them against the readings rather than taking them on
+          trust. The Pub is hosted in Sydney, it is free to join, and its framework is written from
+          scratch rather than built on VORP or RSGCore. Entry is open, with no application to fill
+          in. It is in closed testing at the time of writing, so a temporary allowlist is on until it
+          opens, and while that is true you can measure the route to the box but you cannot log in to
+          take an in-game reading.
+        </p>
+
+        <p>
+          Ask in the Discord for the connect address, run the three commands above against it, and
+          see whether a Sydney host looks like a Sydney host from where you are sitting. Then do the
+          same to every other server you are considering. A server that will not tell you its address
+          has answered a different question.
+        </p>
+
+        <p class="muted">
+          None of that makes it the right server for you, and this page is not the place that
+          argument belongs. It is on the main site, at
+          <a href="https://redm.thepub.beer/" rel="noopener">redm.thepub.beer</a>, where you can
+          weigh it knowing who wrote it.
+        </p>
+      </section>
+
+      <section id="faq" aria-labelledby="h-faq">
+        <h2 id="h-faq">Common questions</h2>
+
+        <div class="faq">
+          <details>
+            <summary>Is the ping in the server browser the same as the ping in game?</summary>
+            <p>
+              Not necessarily. The browser figure is one estimate taken from outside the session. The
+              figure a server shows you once you are connected is measured on the connection you are
+              playing on. Where they disagree, believe the second one, and take it more than once.
+            </p>
+          </details>
+
+          <details>
+            <summary>My ping is low and the game still feels late.</summary>
+            <p>
+              Ping measures the trip, not how long the server takes to think once your message
+              arrives. An overloaded server feels late at any ping, and the giveaway is that the
+              local players feel it too. Ask in the Discord whether anyone else is seeing it.
+            </p>
+          </details>
+
+          <details>
+            <summary>Will a VPN lower my ping to an overseas server?</summary>
+            <p>
+              Usually not. It adds a stop, and distance still sets the floor. The exception is a
+              genuinely bad route where the VPN happens to take a better path, which is worth
+              measuring both ways at the same hour rather than assuming in either direction.
+            </p>
+          </details>
+
+          <details>
+            <summary>The server does not answer ping at all.</summary>
+            <p>
+              Plenty of hosts filter the traffic that ping and tracert use while the game port
+              answers normally. A row of timeouts tells you the box will not talk to that tool. It
+              does not tell you anything about the server.
+            </p>
+          </details>
+
+          <details>
+            <summary>How long should I test for?</summary>
+            <p>
+              Long enough to catch a spike. A hundred packets, which is about a hundred seconds,
+              once during the evening peak and once outside it. The difference between those two
+              readings is the useful part.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why is my ping worse in town than in the wilderness?</summary>
+            <p>
+              Your route did not change because your character walked into Valentine. The server's
+              workload did. A large gap between a quiet reading and a busy town reading is load, and
+              everybody in that town is seeing it.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is there an Australian RedM server worth testing this on?</summary>
+            <p>
+              There are a few, and they are hard to filter for in the client's list. The main site
+              covers finding them in
+              <a href="https://redm.thepub.beer/guides/australian-redm-servers.html" rel="noopener">Australian RedM servers</a>,
+              including what to ask a server that will not say where it is hosted.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="next" aria-labelledby="h-next">
+        <h2 id="h-next">Next</h2>
+        <div class="cards">
+          <div class="panel panel--plain card">
+            <h3>RedM vs FiveM</h3>
+            <p>An honest comparison for people who already know FiveM: what carries over, what does not, and what the smaller ecosystem costs.</p>
+            <a class="btn btn--brass" href="redm-vs-fivem.html">Read the comparison</a>
+          </div>
+          <div class="panel panel--plain card">
+            <h3>Installing RedM</h3>
+            <p>Prerequisites, the first run patch, where the files live and the errors that stop most first installs. Covered on the main site rather than repeated here.</p>
+            <a class="btn" href="https://redm.thepub.beer/guides/install-redm.html" rel="noopener">Read the install guide</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <p class="label">Guides</p>
+        <ul>
+          <li><a href="./">Testing a RedM server's connection</a></li>
+          <li><a href="redm-vs-fivem.html">RedM vs FiveM</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">On this page</p>
+        <ul>
+          <li><a href="#why">What you are measuring</a></li>
+          <li><a href="#tools">The three commands</a></li>
+          <li><a href="#reading">Reading the result</a></li>
+          <li><a href="#in-game">Measuring in game</a></li>
+          <li><a href="#faq">Common questions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">About</p>
+        <ul>
+          <li>Published by <a href="https://redm.thepub.beer/" rel="noopener">The Pub</a>, an Australian RedM server</li>
+          <li>Last checked 13 August 2026</li>
+        </ul>
+      </div>
+    </div>
+    <p class="site-footer__legal">
+      Red Dead Redemption 2 is a trademark of Take-Two Interactive and Rockstar Games. RedM is a
+      project of Cfx.re. This site is an independent guide and is not affiliated with, endorsed by
+      or sponsored by Rockstar Games, Take-Two Interactive or Cfx.re. Corrections are welcome.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
