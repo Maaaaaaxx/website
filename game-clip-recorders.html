@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>How to clip the last few minutes of gameplay on Windows, on any GPU</title>
+<meta name="description" content="Every way to save the last few minutes of gameplay after it has already happened: NVIDIA Instant Replay, AMD Radeon, Xbox Game Bar, OBS's replay buffer, Medal and Radium. What a replay buffer actually is, why the capture method decides whether you lose frames, and which tool suits which machine.">
+<link rel="canonical" href="https://maaaaaaxx.github.io/website/game-clip-recorders.html">
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Radium">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Radium Guides">
+<meta property="og:locale" content="en_AU">
+<meta property="og:title" content="How to clip the last few minutes of gameplay on Windows">
+<meta property="og:description" content="Replay buffers explained, and an honest comparison of NVIDIA, AMD, Game Bar, OBS, Medal and Radium — including why the capture method is what costs you frames.">
+<meta property="og:url" content="https://maaaaaaxx.github.io/website/game-clip-recorders.html">
+<meta property="og:image" content="https://radium.au/assets/og-radium.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clipping the last few minutes of gameplay on Windows">
+<meta name="twitter:description" content="What a replay buffer is, why capture method decides your frame cost, and which recorder suits your GPU.">
+<meta name="twitter:image" content="https://radium.au/assets/og-radium.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/radium.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to clip the last few minutes of gameplay on Windows, on any GPU",
+  "description": "An explanation of replay buffers and an honest comparison of the tools that provide them on Windows: NVIDIA Instant Replay, AMD Radeon, Xbox Game Bar, OBS Studio, Medal and Radium.",
+  "datePublished": "2026-08-21",
+  "dateModified": "2026-08-21",
+  "inLanguage": "en-AU",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://maaaaaaxx.github.io/website/game-clip-recorders.html"
+  },
+  "author": { "@type": "Organization", "name": "Radium", "url": "https://radium.au/" },
+  "publisher": { "@type": "Organization", "name": "Radium", "url": "https://radium.au/" },
+  "image": "https://radium.au/assets/og-radium.png"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I use ShadowPlay without an NVIDIA graphics card?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Instant Replay, which is what most people mean by ShadowPlay, is part of NVIDIA's own software and needs a supported NVIDIA GPU. AMD and Intel ship their own equivalents, and vendor-neutral tools will use whichever hardware encoder your GPU provides."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a replay buffer slow the game down?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on how frames are captured and encoded, not on the buffer itself. Hardware encoding plus Desktop Duplication costs very little. CPU encoding, or capturing a single window through GDI, costs a great deal more — in one measurement, roughly twelve times the CPU time for identical footage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long can the buffer be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Game Bar offers up to 10 minutes and NVIDIA up to 20. OBS and Radium are limited mainly by disk space. Length costs storage rather than performance, since the footage is being encoded either way — the only question is how much of it is kept before being thrown away."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my clip show Discord instead of the game?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the tool is capturing a window rather than the screen, and you alt-tabbed while the moment was still inside the buffer. Full-screen capture cannot have this problem; at worst the clip is labelled with the wrong application, which is cosmetic rather than fatal."
+      }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="stripes"></div>
+
+<header class="site-header">
+  <div class="wrap wide site-header__inner">
+    <a class="brand" href="https://radium.au/">
+      <span class="brand__name">Radium Guides</span>
+      <span class="brand__note">Published by Radium, written to stand on their own</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="https://radium.au/">radium.au</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="./">Guides</a> &rsaquo; Clipping gameplay on Windows
+    </nav>
+
+    <div class="masthead">
+      <h1>How to clip the last few minutes of gameplay on Windows, on any GPU</h1>
+      <p class="standfirst">
+        The good moments never announce themselves. By the time you know you want the
+        clip, it has already happened — which is a solved problem, and has been for a
+        decade. Here is how the solution works, and which tool does it best on the
+        machine you actually own.
+      </p>
+      <p class="byline">
+        Written by <a href="https://radium.au/">Radium</a> &middot; 21 August 2026 &middot;
+        Radium is one of the tools compared here; see
+        <a href="#who">the disclosure</a> before you weigh anything below.
+      </p>
+    </div>
+  </div>
+
+  <article class="wrap prose">
+
+    <h2>The feature you want is a replay buffer</h2>
+
+    <p>
+      Almost everyone starts by looking for a recorder, presses record before a session,
+      and ends up with a 40GB file they never open. That is backwards, and it is not what
+      the people posting clips are doing.
+    </p>
+
+    <p>
+      What they use is a <strong>replay buffer</strong>: the software is always encoding,
+      but it only ever keeps the last few minutes, throwing away everything older. Nothing
+      reaches your drive permanently until you press a key, at which point the few minutes
+      still in memory are written out. You are not starting a recording when you press the
+      key. You are stopping one from being discarded.
+    </p>
+
+    <p>
+      This is why the feature has confusing names. NVIDIA calls it Instant Replay, AMD has
+      called it both Instant Replay and ReLive, Windows calls it "Record the last 30
+      seconds", and OBS calls it the Replay Buffer. They are the same idea.
+    </p>
+
+    <h2>What it costs you, and why that varies so much</h2>
+
+    <p>
+      "Does it hurt my FPS" has a real answer, and it depends on two decisions the software
+      makes on your behalf.
+    </p>
+
+    <h3>Where the encoding happens</h3>
+    <p>
+      Every modern GPU has a dedicated video encoder built into the silicon — NVENC on
+      NVIDIA, and equivalents on AMD and Intel. It sits separate from the shader cores that
+      render your game, so using it costs almost nothing you were using anyway. Encoding on
+      the CPU instead, with something like x264, is where the stutter stories come from.
+      Any tool worth using defaults to the hardware encoder.
+    </p>
+
+    <h3>How frames are captured</h3>
+    <p>
+      This one is less discussed and matters more than people expect. Grabbing the whole
+      screen through the Desktop Duplication API is close to free, because the compositor
+      is already producing that image. Grabbing one specific window through the older GDI
+      path makes the system draw it again on request.
+    </p>
+    <p>
+      The gap is not subtle. Measuring the same workload both ways, window capture consumed
+      <strong>70.6 CPU-seconds against 6.0</strong> for Desktop Duplication — roughly twelve
+      times the cost for the same footage. If a recorder offers to capture "just the game
+      window" and your frame rate drops when you enable it, this is usually why.
+    </p>
+
+    <div class="note">
+      <span class="note__title">The practical version</span>
+      <p>
+        Hardware encoder plus full-screen capture is the cheap combination, and it is what
+        the built-in tools have always done. A properly configured buffer on a modern GPU
+        costs low single-digit percentages of one CPU core. If yours is costing more than
+        that, the settings are wrong, not the idea.
+      </p>
+    </div>
+
+    <h2>The options</h2>
+
+    <p>
+      Checked in August 2026. Vendors change these often, so treat the specifics as a
+      starting point rather than gospel.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th><th>Works on</th><th>Buffer</th><th>Account</th><th>Clips live</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>NVIDIA Instant Replay</strong><br><span class="brand__note">in the NVIDIA app</span></td>
+            <td>NVIDIA GPUs only</td>
+            <td>Up to 20 min</td>
+            <td class="no">No</td>
+            <td>Your PC</td>
+          </tr>
+          <tr>
+            <td><strong>AMD Radeon</strong><br><span class="brand__note">Instant Replay / ReLive</span></td>
+            <td>AMD GPUs only</td>
+            <td>Configurable</td>
+            <td class="no">No</td>
+            <td>Your PC</td>
+          </tr>
+          <tr>
+            <td><strong>Xbox Game Bar</strong></td>
+            <td>Any, built into Windows</td>
+            <td>Up to 10 min</td>
+            <td class="no">No</td>
+            <td>Your PC</td>
+          </tr>
+          <tr>
+            <td><strong>OBS Studio</strong></td>
+            <td>Any</td>
+            <td>Disk limited</td>
+            <td class="no">No</td>
+            <td>Your PC</td>
+          </tr>
+          <tr>
+            <td><strong>Medal</strong></td>
+            <td>Any</td>
+            <td>Configurable</td>
+            <td class="yes">Yes</td>
+            <td>Their platform</td>
+          </tr>
+          <tr>
+            <td><strong>Radium</strong></td>
+            <td>Any GPU with an encoder</td>
+            <td>5 to 30 min</td>
+            <td>Only to share</td>
+            <td>Your PC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>If you have an NVIDIA card</h3>
+    <p>
+      Use Instant Replay. It is free, it is already installed, it costs very little, and it
+      adds nothing to your clips. There is no argument for installing anything else unless
+      you specifically need something it does not do. Anyone telling you otherwise is
+      selling something.
+    </p>
+
+    <h3>If you have AMD or Intel</h3>
+    <p>
+      This is where it gets thinner, and it is the single most common reason people go
+      looking. AMD's equivalent exists and is free, but it has a longer history of being
+      switched off by driver updates or silently failing to capture particular games.
+      Intel's provision depends heavily on which graphics you have. Both are worth trying
+      first, because free and built-in beats everything else when it works.
+    </p>
+    <p>
+      When it does not work, the honest options are a vendor-neutral tool: OBS, something
+      commercial, or <a href="https://radium.au/">Radium</a>.
+    </p>
+
+    <h3>If you already run OBS</h3>
+    <p>
+      Turn on the Replay Buffer in Settings and bind a hotkey. It is genuinely good and you
+      already have it. The catch is that OBS is a broadcasting suite you are using one
+      feature of: it wants a scene collection configured, it does not know what game you
+      were playing, and it will not help you trim the clip afterwards. That is a fair trade
+      for some people and an irritation for others.
+    </p>
+
+    <h2>The part nobody mentions until later</h2>
+
+    <p>
+      Saving the clip is the easy half. What follows is where tools differ more than their
+      feature lists suggest.
+    </p>
+
+    <p>
+      <strong>Trimming.</strong> A twenty minute buffer is not a clip. If your recorder
+      dumps the whole buffer and leaves you to open a video editor, most of those clips
+      never get shared. If it only ever saves the last 30 seconds, you will regularly miss
+      the setup that made the moment funny. Saving generously and cutting down afterwards,
+      in the same application, is the workflow that survives contact with actually using it.
+    </p>
+
+    <p>
+      <strong>What is in the frame.</strong> Tools that follow a single window record
+      whatever you alt-tabbed to. Tools that capture the screen always have the game in
+      them, and the remaining question is only whether the clip gets <em>labelled</em>
+      correctly. Attributing a clip to the game that was on screen, rather than to the app
+      that happened to be focused, is a small thing that becomes obvious once you have two
+      hundred clips.
+    </p>
+
+    <p>
+      <strong>Where the file ends up.</strong> Some tools are recorders that happen to
+      offer sharing; others are platforms that happen to record. Neither is wrong, but they
+      are different products, and it is worth knowing which you installed. If clips land on
+      someone's service by default, that is the deal you accepted, and it usually comes with
+      an account, an upload, and a decision about your footage that is no longer entirely
+      yours.
+    </p>
+
+    <div class="note note--warn">
+      <span class="note__title">Worth checking before you commit</span>
+      <p>
+        Whether clips are watermarked, whether an account is required to record at all,
+        whether upload happens automatically, and what resolution the free tier shares at.
+        These are the terms that change between versions, and they are the ones that
+        annoy people six months in.
+      </p>
+    </div>
+
+    <h2>How to choose in about a minute</h2>
+
+    <ul>
+      <li><strong>NVIDIA GPU, no strong feelings:</strong> Instant Replay. Stop reading.</li>
+      <li><strong>Want zero installs:</strong> Xbox Game Bar, already on your machine.</li>
+      <li><strong>Already stream:</strong> OBS Replay Buffer.</li>
+      <li><strong>AMD or Intel and the built-in one is misbehaving:</strong> a vendor-neutral tool.</li>
+      <li><strong>Want long buffers, trimming, and clips that stay yours:</strong> that is the gap Radium was built for.</li>
+    </ul>
+
+    <h2 id="who">Who wrote this</h2>
+
+    <div class="note note--who">
+      <span class="note__title">Disclosure</span>
+      <p>
+        This was written by the people who make Radium, which is one of the six tools in
+        the table. That is a reason to read the recommendations sceptically, so they are
+        made as narrow as they honestly can be: if you own an NVIDIA card, the advice above
+        is to use NVIDIA's free tool and install nothing, because that is true and pretending
+        otherwise would be the fastest way to make this page worthless.
+      </p>
+      <p>
+        The numbers about capture cost are measurements taken while building Radium, on one
+        machine, and are quoted to show the size of the difference rather than to be a
+        benchmark. Everything said about other tools is from their own documentation and
+        behaviour at the time of writing, and any of it can change with a driver update.
+      </p>
+    </div>
+
+    <h2>Common questions</h2>
+
+    <div class="faq">
+      <details>
+        <summary>Can I use ShadowPlay without an NVIDIA graphics card?</summary>
+        <p>
+          No. Instant Replay, which is what most people mean by ShadowPlay, is part of
+          NVIDIA's own software and needs a supported NVIDIA GPU. AMD and Intel ship their
+          own equivalents, and vendor-neutral tools will use whichever hardware encoder your
+          GPU provides.
+        </p>
+      </details>
+      <details>
+        <summary>Does a replay buffer slow the game down?</summary>
+        <p>
+          It depends on how frames are captured and encoded, not on the buffer itself.
+          Hardware encoding plus Desktop Duplication costs very little. CPU encoding, or
+          capturing a single window through GDI, costs a great deal more — in one
+          measurement, roughly twelve times the CPU time for identical footage.
+        </p>
+      </details>
+      <details>
+        <summary>How long can the buffer be?</summary>
+        <p>
+          Game Bar offers up to 10 minutes and NVIDIA up to 20. OBS and Radium are limited
+          mainly by disk space. Length costs storage rather than performance, since the
+          footage is being encoded either way — the only question is how much of it is kept
+          before being thrown away.
+        </p>
+      </details>
+      <details>
+        <summary>Why does my clip show Discord instead of the game?</summary>
+        <p>
+          Because the tool is capturing a window rather than the screen, and you alt-tabbed
+          while the moment was still inside the buffer. Full-screen capture cannot have this
+          problem; at worst the clip is labelled with the wrong application, which is
+          cosmetic rather than fatal.
+        </p>
+      </details>
+      <details>
+        <summary>Will recording fill my drive?</summary>
+        <p>
+          The buffer will not, because it discards continuously and its size is bounded by
+          the length you set. Saved clips will, eventually, like any video. A 5 minute clip
+          at 1440p60 is in the low hundreds of megabytes, so the habit worth forming is
+          trimming clips down to the part you actually wanted before they accumulate.
+        </p>
+      </details>
+    </div>
+
+    <section class="next" aria-labelledby="h-next">
+      <h2 id="h-next">If you want the tool this came from</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Radium</h3>
+          <p>
+            Free clip recorder for Windows. Any GPU with a hardware encoder, buffers of 5
+            to 30 minutes, trimming built in, and no watermark.
+          </p>
+          <a class="btn" href="https://radium.au/">Get it free</a>
+        </div>
+        <div class="card">
+          <h3>How it works</h3>
+          <p>
+            The measurements behind the numbers above, and what it does differently from
+            wrapping OBS.
+          </p>
+          <a class="btn btn--ghost" href="https://radium.au/#why">Read the detail</a>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap wide">
+    <p>
+      Published by <a href="https://radium.au/">Radium</a>, a free game clip recorder for
+      Windows. This guide is hosted separately from the product site and is written to be
+      useful whether or not you install anything.
+    </p>
+    <p>
+      Product names belong to their owners. Nothing here is endorsed by NVIDIA, AMD, Intel,
+      Microsoft, the OBS Project or Medal.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
