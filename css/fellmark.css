@@ -1,0 +1,119 @@
+/* fellmark.css
+   Styling for the Fellmark guide. Self-contained, like every other subject on
+   this site: a reader who arrived looking for how terrain works should not
+   inherit the styling of a card game or a RedM server article.
+
+   Nordic register: cold stone and iron, one moss accent, one ember accent for
+   anything that warns. Flat colour, no glow, no gradient on text. */
+
+:root{
+  --stone:#101416; --stone-2:#161B1E; --panel:#1C2327;
+  --line:rgba(154,178,184,.24); --line-soft:rgba(154,178,184,.12);
+  --frost:#E7EDEF; --muted:#9AA9AF; --dim:#6F7D84;
+  --moss:#7FA96B; --moss-lift:#95C07F;
+  --ember:#C2703C;
+  --iron:#9AB2B8;
+  --display:"Cabin Condensed","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --measure:44rem;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--stone);color:var(--frost);font-family:var(--body);
+  font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased}
+
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{left:8px;top:8px;position:fixed;z-index:99;background:var(--moss);
+  color:#0d1012;padding:10px 14px}
+
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 22px}
+.wide{max-width:64rem}
+
+.stripes{height:3px;background:linear-gradient(90deg,var(--iron) 0%,var(--iron) 34%,
+  var(--moss) 34%,var(--moss) 62%,var(--ember) 62%,var(--ember) 100%)}
+
+.site-header{background:rgba(16,20,22,.92);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
+.site-header__inner{display:flex;align-items:center;gap:16px;padding:14px 22px;
+  max-width:var(--measure);margin:0 auto}
+.brand{display:flex;flex-direction:column;gap:1px;text-decoration:none}
+.brand__name{font-family:var(--display);font-weight:700;font-size:18px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--frost)}
+.brand__note{font-size:12px;color:var(--dim)}
+.nav{margin-left:auto;display:flex;gap:16px;font-size:13.5px}
+.nav a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:focus-visible{color:var(--frost);border-bottom-color:var(--moss)}
+
+.crumbs{font-size:12.5px;color:var(--dim);padding-top:20px}
+.crumbs a{color:var(--muted)}
+
+.masthead{padding:34px 0 6px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,5.2vw,46px);
+  line-height:1.14;margin:0 0 16px;text-wrap:balance;letter-spacing:.005em}
+.standfirst{font-size:19px;color:var(--muted);margin:0 0 20px;line-height:1.7}
+.byline{font-size:13px;color:var(--dim);border-top:1px solid var(--line-soft);
+  padding-top:14px;margin-bottom:8px}
+
+.prose h2{font-family:var(--display);font-weight:700;font-size:27px;line-height:1.26;
+  margin:44px 0 12px;letter-spacing:.01em}
+.prose h3{font-size:19px;font-weight:600;margin:28px 0 8px}
+.prose p{margin:0 0 18px}
+.prose ul,.prose ol{margin:0 0 18px;padding-left:22px}
+.prose li{margin-bottom:9px}
+.prose strong{color:#fff;font-weight:600}
+.prose em{color:var(--moss-lift);font-style:italic}
+.prose a{color:var(--moss-lift);text-underline-offset:3px}
+.prose a:hover,.prose a:focus-visible{color:var(--frost)}
+.prose code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
+  background:var(--panel);padding:2px 6px;border:1px solid var(--line-soft)}
+
+.table-wrap{overflow-x:auto;margin:0 0 22px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);
+  font-weight:600;background:var(--stone-2)}
+tbody tr:last-child td{border-bottom:none}
+.yes{color:var(--moss-lift);font-weight:600}
+.no{color:var(--ember);font-weight:600}
+
+.note{border:1px solid var(--line);background:var(--stone-2);padding:18px 20px;margin:0 0 22px}
+.note--warn{border-color:rgba(194,112,60,.5);background:rgba(194,112,60,.07)}
+.note--who{border-color:rgba(127,169,107,.45);background:rgba(127,169,107,.07)}
+.note__title{display:block;font-family:var(--display);font-size:12px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--iron);margin-bottom:7px}
+.note p:last-child{margin-bottom:0}
+
+.faq{margin-top:14px}
+.faq details{border-bottom:1px solid var(--line-soft)}
+.faq summary{cursor:pointer;padding:15px 0;font-weight:600;font-size:17px;
+  list-style:none;display:flex;gap:12px;align-items:baseline}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"+";color:var(--moss-lift);font-weight:700;flex:none}
+.faq details[open] summary::before{content:"\2212"}
+.faq summary:hover{color:#fff}
+.faq p{margin:0 0 16px;padding-left:24px;color:var(--muted)}
+
+.next{margin:52px 0 20px;border-top:1px solid var(--line);padding-top:28px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--panel);border:1px solid var(--line-soft);padding:18px}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0 0 12px;font-size:14.5px;color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--moss);color:#0d1012;
+  text-decoration:none;font-weight:700;font-size:14px;padding:10px 17px;border:1px solid var(--moss)}
+.btn:hover,.btn:focus-visible{background:var(--moss-lift);border-color:var(--moss-lift)}
+.btn--ghost{background:none;color:var(--iron);border:1px solid var(--line)}
+.btn--ghost:hover,.btn--ghost:focus-visible{color:var(--frost);border-color:var(--iron);background:none}
+
+.site-footer{margin-top:60px;border-top:1px solid var(--line);padding:26px 0 60px;
+  font-size:13.5px;color:var(--dim)}
+.site-footer a{color:var(--muted)}
+
+a:focus-visible,summary:focus-visible{outline:2px solid var(--moss);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto};*{transition:none!important}}
+@media(max-width:620px){
+  body{font-size:16.5px}
+  .prose h2{font-size:24px}
+  .nav{gap:12px;font-size:13px}
+}

@@ -1,0 +1,122 @@
+/* hollowcross.css
+   Styling for the Hollowcross guide. Self-contained on purpose: this page
+   shares no stylesheet with the RedM pages or the Radium guide, because the
+   three subjects share no reader. A visitor who arrives here looking for a
+   card game should never see the leftovers of a server-hosting article.
+
+   Gothic register: bone on ink, one blood accent, one verdigris accent.
+   No gradients on text, no glow. The palette is doing the work. */
+
+:root{
+  --ink:#0E0B10; --ink-2:#151119; --panel:#1B1620;
+  --line:rgba(196,168,128,.26); --line-soft:rgba(196,168,128,.14);
+  --bone:#EDE6DA; --muted:#A79C8C; --dim:#7C7263;
+  --blood:#A3313B; --blood-lift:#C4424D;
+  --verd:#5E8C7B;
+  --gold:#C4A880;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Inter","Segoe UI",system-ui,sans-serif;
+  --measure:44rem;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--body);
+  font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased}
+
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{left:8px;top:8px;position:fixed;z-index:99;background:var(--blood);
+  color:#fff;padding:10px 14px;border-radius:2px}
+
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 22px}
+.wide{max-width:64rem}
+
+.stripes{height:3px;background:linear-gradient(90deg,var(--blood) 0%,var(--blood) 28%,
+  var(--gold) 28%,var(--gold) 52%,var(--verd) 52%,var(--verd) 100%)}
+
+.site-header{background:rgba(14,11,16,.92);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
+.site-header__inner{display:flex;align-items:center;gap:16px;padding:14px 0;
+  max-width:var(--measure);margin:0 auto;padding-left:22px;padding-right:22px}
+.brand{display:flex;flex-direction:column;gap:1px;text-decoration:none}
+.brand__name{font-family:var(--display);font-weight:700;font-size:19px;
+  letter-spacing:.06em;color:var(--bone)}
+.brand__note{font-size:12px;color:var(--dim)}
+.nav{margin-left:auto;display:flex;gap:16px;font-size:13.5px}
+.nav a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:focus-visible{color:var(--bone);border-bottom-color:var(--blood)}
+
+.crumbs{font-size:12.5px;color:var(--dim);padding-top:20px}
+.crumbs a{color:var(--muted)}
+
+.masthead{padding:34px 0 6px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,5.4vw,50px);
+  line-height:1.12;letter-spacing:-.005em;margin:0 0 16px;text-wrap:balance}
+.standfirst{font-size:19px;color:var(--muted);margin:0 0 20px;line-height:1.7}
+.byline{font-size:13px;color:var(--dim);border-top:1px solid var(--line-soft);
+  padding-top:14px;margin-bottom:8px}
+
+.prose h2{font-family:var(--display);font-weight:700;font-size:29px;line-height:1.24;
+  margin:44px 0 12px;letter-spacing:-.003em}
+.prose h3{font-size:19px;font-weight:600;margin:28px 0 8px;color:var(--bone)}
+.prose p{margin:0 0 18px}
+.prose ul,.prose ol{margin:0 0 18px;padding-left:22px}
+.prose li{margin-bottom:9px}
+.prose strong{color:#fff;font-weight:600}
+.prose em{color:var(--gold);font-style:italic}
+.prose a{color:var(--gold);text-underline-offset:3px}
+.prose a:hover,.prose a:focus-visible{color:var(--bone)}
+.prose code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
+  background:var(--panel);padding:2px 6px;border:1px solid var(--line-soft)}
+
+.table-wrap{overflow-x:auto;margin:0 0 22px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:540px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line-soft);
+  vertical-align:top}
+th{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);
+  font-weight:600;background:var(--ink-2)}
+tbody tr:last-child td{border-bottom:none}
+.yes{color:var(--verd);font-weight:600}
+.no{color:var(--blood-lift);font-weight:600}
+
+.note{border:1px solid var(--line);background:var(--ink-2);padding:18px 20px;margin:0 0 22px}
+.note--warn{border-color:rgba(163,49,59,.5);background:rgba(163,49,59,.07)}
+.note--who{border-color:rgba(94,140,123,.45);background:rgba(94,140,123,.06)}
+.note__title{display:block;font-family:var(--display);font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.note p:last-child{margin-bottom:0}
+
+.faq{margin-top:14px}
+.faq details{border-bottom:1px solid var(--line-soft)}
+.faq summary{cursor:pointer;padding:15px 0;font-weight:600;font-size:17px;
+  list-style:none;display:flex;gap:12px;align-items:baseline}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"+";color:var(--blood-lift);font-weight:700;flex:none}
+.faq details[open] summary::before{content:"\2212"}
+.faq summary:hover{color:#fff}
+.faq p{margin:0 0 16px;padding-left:24px;color:var(--muted)}
+
+.next{margin:52px 0 20px;border-top:1px solid var(--line);padding-top:28px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--panel);border:1px solid var(--line-soft);padding:18px}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0 0 12px;font-size:14.5px;color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blood);color:#fff;
+  text-decoration:none;font-weight:600;font-size:14px;padding:10px 17px;
+  border:1px solid var(--blood)}
+.btn:hover,.btn:focus-visible{background:var(--blood-lift);border-color:var(--blood-lift)}
+.btn--ghost{background:none;color:var(--gold);border:1px solid var(--line)}
+.btn--ghost:hover,.btn--ghost:focus-visible{color:var(--bone);border-color:var(--gold);background:none}
+
+.site-footer{margin-top:60px;border-top:1px solid var(--line);padding:26px 0 60px;
+  font-size:13.5px;color:var(--dim)}
+.site-footer a{color:var(--muted)}
+
+a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto};*{transition:none!important}}
+@media(max-width:620px){
+  body{font-size:16.5px}
+  .prose h2{font-size:25px}
+  .nav{gap:12px;font-size:13px}
+}

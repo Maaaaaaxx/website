@@ -8,33 +8,37 @@
   each other and one of them loses. Priorities are relative within this site
   only.
 
-  Two subjects live here now, RedM and game clip recording, and they do not
-  share a reader. They are kept apart rather than cross-linked: each page
-  carries its own styling, its own site name and its own disclosure, and the
-  RedM index does not link the Radium guide or the reverse. Mixing them in a
-  navigation would muddy what each page is about for no gain to either.
+  Five subjects live here now - RedM, game clip recording, deckbuilding
+  roguelikes, voxel terrain and Twitch chat bots - and they do not share a
+  reader. They are kept apart rather than cross-linked: each page carries its
+  own stylesheet, its own site name and its own disclosure, and no page links
+  sideways to an unrelated one. Mixing them in a navigation would muddy what
+  each page is about for no gain to any of them. The only shared link is the
+  studio, which is a factual statement of who publishes them, not a promotion.
 
   The host in every <loc> must match the GitHub Pages URL exactly, including
   the trailing slash on the index and the lowercase name in /website/. A project
   page's path is case sensitive, so /Website/ is a 404 on this repository: the
   repo was renamed from Website to website and 57 references had to follow it.
   If this site ever moves to a custom domain, this file, the canonical tag on
-  both pages and the Sitemap line in robots.txt all change together, or
+  every page and the Sitemap line in robots.txt all change together, or
   Search Console reports the sitemap as containing URLs on a different host
   and ignores it.
 
   Submit at https://search.google.com/search-console for the github.io
-  property, and at Bing Webmaster Tools.
+  property, and at Bing Webmaster Tools. Resubmitting after adding pages is
+  not required - Google re-reads the sitemap on its own schedule - but it is
+  the fastest way to get new URLs into the crawl queue.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- RedM / server hosting -->
   <url>
     <loc>https://maaaaaaxx.github.io/website/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-
   <url>
     <loc>https://maaaaaaxx.github.io/website/redm-vs-fivem.html</loc>
     <lastmod>2026-08-13</lastmod>
@@ -42,9 +46,34 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Clip recording -->
   <url>
     <loc>https://maaaaaaxx.github.io/website/game-clip-recorders.html</loc>
     <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Deckbuilding roguelikes -->
+  <url>
+    <loc>https://maaaaaaxx.github.io/website/deckbuilding-roguelikes-browser.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Voxel terrain -->
+  <url>
+    <loc>https://maaaaaaxx.github.io/website/digging-in-survival-games.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Twitch chat bots -->
+  <url>
+    <loc>https://maaaaaaxx.github.io/website/twitch-chat-bots.html</loc>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

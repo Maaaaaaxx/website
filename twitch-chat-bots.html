@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Twitch chat bots: what they actually do, and how to choose one</title>
+<meta name="description" content="What a Twitch chat bot is for beyond spam filtering: commands, timers, loyalty points, alerts and overlays. Hosted versus self-hosted, what breaks when you stream to Twitch and Discord at once, and the permission you should never hand over.">
+<link rel="canonical" href="https://maaaaaaxx.github.io/website/twitch-chat-bots.html">
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="MaxBot">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MaxBot Guides">
+<meta property="og:locale" content="en_AU">
+<meta property="og:title" content="Twitch chat bots: what they do and how to choose one">
+<meta property="og:description" content="Moderation, commands, timers, points and overlays, explained. Hosted versus self-hosted, and the permissions worth refusing.">
+<meta property="og:url" content="https://maaaaaaxx.github.io/website/twitch-chat-bots.html">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Twitch chat bots, explained">
+<meta name="twitter:description" content="What chat bots actually do, hosted versus self-hosted, and the permission you should never grant.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/maxbot.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Twitch chat bots: what they actually do, and how to choose one",
+  "description": "A practical explanation of what Twitch chat bots do, the difference between hosted and self-hosted bots, how overlays relate to them, and which account permissions are worth refusing.",
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "inLanguage": "en-AU",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://maaaaaaxx.github.io/website/twitch-chat-bots.html" },
+  "author": { "@type": "Organization", "name": "MaxBot", "url": "https://maxbot.tv/" },
+  "publisher": { "@type": "Organization", "name": "MaxBot", "url": "https://maxbot.tv/" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a Twitch chat bot actually do?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Four things, in rough order of how much they matter: it moderates chat automatically, it answers repeated questions through commands so you do not have to, it posts timed messages while you are concentrating, and it tracks viewer activity such as watch time or loyalty points. Many bots also drive on-screen overlays and alerts, though that is a separate job that happens to live in the same product." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a chat bot if I am a small streamer?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, earlier than most people expect, but for a different reason than large channels. A small channel rarely has a spam problem; it has an attention problem. You cannot watch chat, play well and talk at once. A bot answering the same three questions and posting your links on a timer buys back attention, which is the scarce resource when you are alone on stream." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a hosted chat bot or a self-hosted one better?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Hosted is right for almost everyone: it runs when your computer is off, needs no maintenance, and survives your machine dying mid-stream. Self-hosted is worth it only if you need behaviour no hosted service offers, want your data on your own hardware, or are prepared to be on call for your own outages at two in the morning." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are chat bot overlays different from chat bots?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Technically yes. A chat bot reads and writes chat messages. An overlay is a web page your broadcasting software loads as a browser source and composites over your video. They are bundled together because they share the same event data, but they are separate systems and a failure in one does not necessarily break the other." }
+    },
+    {
+      "@type": "Question",
+      "name": "What permissions should I give a chat bot?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Grant chat reading and sending, moderation actions, and the event subscriptions it needs for alerts. Be cautious about anything touching channel editing, stream key access, or your channel points and payouts. A bot that asks for permission to edit your channel or manage your revenue is asking for more than its job requires." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="stripes"></div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="https://maxbot.tv/">
+      <span class="brand__name">MaxBot</span>
+      <span class="brand__note">Published by MaxBot, written to stand on its own</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="https://maxbot.tv/">maxbot.tv</a>
+      <a href="#who">Disclosure</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="https://maxbot.tv/">MaxBot</a> &rsaquo; Twitch chat bots explained
+    </nav>
+    <div class="masthead">
+      <h1>Twitch chat bots: what they actually do, and how to choose one</h1>
+      <p class="standfirst">Most guides start with spam filtering, which is the least interesting thing a chat bot does and the last problem a small channel actually has. The real job is buying back your attention while you are busy playing.</p>
+      <p class="byline">Published 13 September 2026 &middot; Written by the team behind MaxBot &middot; Read <a href="#who">the disclosure</a> before you weigh anything below</p>
+    </div>
+  </div>
+
+  <article class="wrap prose">
+
+    <div class="note">
+      <span class="note__title">The short version</span>
+      <p>A chat bot does four jobs: <strong>moderation, commands, timers and tracking</strong>. Most streamers should use a hosted one, because a bot that only runs when your PC is on is a bot that is off exactly when you are already having a bad night. Overlays usually ship in the same product but are a separate system. And no bot needs permission to edit your channel.</p>
+    </div>
+
+    <h2>The four jobs</h2>
+
+    <h3>1. Moderation</h3>
+    <p>The famous one. Bots catch link spam, repeated phrases, excessive capitals, banned words and the follow-bot waves that arrive without warning. They act faster than a human and they do not get tired.</p>
+    <p>What they are bad at is judgement. Automated moderation catches patterns, not intent, and a sarcastic message and a genuinely nasty one can look identical to a filter. Treat it as a first pass that reduces volume, not as a replacement for a human moderator once you have chat busy enough to need one.</p>
+
+    <h3>2. Commands</h3>
+    <p>The one that does the most work for the least effort. A command is a stored answer to a question you are asked constantly: your setup, your settings, your Discord link, when you stream, what mods you are running.</p>
+    <p>You will be asked these every single stream, usually while you are concentrating. <code>!specs</code> answers instantly and never gets tired of answering. This is the feature that pays for itself in the first week.</p>
+
+    <h3>3. Timers</h3>
+    <p>Messages posted on a schedule: your socials, your Discord, a reminder to follow, a note about the current run.</p>
+    <p>Timers are also the feature most commonly overused. A message every five minutes in a chat of eight people reads as a machine talking to itself. Longer intervals, fewer messages, and ideally a minimum number of chat lines between posts so the bot stays quiet when the room is quiet.</p>
+
+    <h3>4. Tracking</h3>
+    <p>Watch time, loyalty points, a currency people spend on requests or a gamble command, leaderboards.</p>
+    <p>This is the one to add last. It matters when you have regulars who care about their standing, and it is noise before that. Adding a points economy to a channel with four viewers creates an economy of four people.</p>
+
+    <h2>Hosted or self-hosted</h2>
+
+    <p>The genuine architectural decision. It is not about features; it is about where the thing runs and who is responsible when it stops.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>&nbsp;</th><th>Hosted (cloud)</th><th>Self-hosted (your PC)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Runs when your PC is off</strong></td><td class="yes">Yes</td><td class="no">No</td></tr>
+          <tr><td><strong>Setup</strong></td><td>Sign in, authorise</td><td>Install, configure, keep updated</td></tr>
+          <tr><td><strong>Uses your CPU while gaming</strong></td><td class="yes">No</td><td class="no">Yes, a little</td></tr>
+          <tr><td><strong>Survives your machine crashing</strong></td><td class="yes">Yes</td><td class="no">No</td></tr>
+          <tr><td><strong>Who fixes an outage</strong></td><td>Them</td><td class="no">You, mid-stream</td></tr>
+          <tr><td><strong>Custom behaviour</strong></td><td>What they built</td><td class="yes">Anything you can code</td></tr>
+          <tr><td><strong>Where your viewer data lives</strong></td><td>Their servers</td><td class="yes">Your disk</td></tr>
+          <tr><td><strong>Cost</strong></td><td>Free tier or subscription</td><td>Free, plus your time</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note note--warn">
+      <span class="note__title">The failure people do not plan for</span>
+      <p>A self-hosted bot dies with the machine it lives on. The moment your game crashes hard enough to take Windows with it, you lose your moderation, your commands and your alerts at exactly the moment you are already flustered and your chat is asking what happened. If you run one locally, know that this is the trade you accepted.</p>
+    </div>
+
+    <h2>Overlays are a different system wearing the same coat</h2>
+
+    <p>Most bot services also provide <strong>overlays</strong>: the follower alerts, subscriber notifications, goal bars and chat boxes that appear over your video.</p>
+
+    <p>These are not chat bot features. An overlay is a web page that your broadcasting software loads as a <em>browser source</em> and composites over your scene. It happens to react to the same events the bot watches, which is why they are sold together, but it is a separate system.</p>
+
+    <p>That distinction matters for one practical reason: <strong>they fail separately</strong>. Alerts can stop while chat commands work perfectly, or the reverse. When something breaks, knowing they are two systems tells you where to look instead of restarting everything.</p>
+
+    <h3>What to check in an overlay editor</h3>
+    <ul>
+      <li><strong>Can you see it while editing?</strong> Editors that only preview after saving turn a five-minute layout into half an hour.</li>
+      <li><strong>Does it respect transparency?</strong> A browser source must have a transparent background, not a black one that covers your game.</li>
+      <li><strong>Can you test-fire an alert?</strong> Without a test button you are waiting for a real follower to find out whether it works.</li>
+      <li><strong>How heavy is it?</strong> Browser sources cost CPU. An overlay running constant animation is competing with your game for the same machine.</li>
+    </ul>
+
+    <h2>Streaming to more than one place</h2>
+
+    <p>Plenty of people run a Twitch channel and a Discord server, or stream to more than one platform. This is where the differences between bots become obvious.</p>
+
+    <p>The question to ask is whether the bot treats your channels as <strong>one account with several rooms</strong>, or as several unrelated setups. If it is the latter, every command, timer and setting has to be built twice and kept in sync by hand, and they will drift.</p>
+
+    <p>A related question, which sounds pedantic until it bites you, is how identity is handled. If someone links their Twitch account in your channel, does that carry to another channel using the same bot? There is a reasonable argument both ways, and the important thing is that the bot has an answer and states it, because "your points vanished" is an unpleasant thing to discover during a stream.</p>
+
+    <h2>Permissions: what to grant and what to refuse</h2>
+
+    <p>Every bot asks you to authorise it against your account. Most people click through. It is worth ten seconds of reading.</p>
+
+    <p><strong>Reasonable to grant:</strong></p>
+    <ul>
+      <li>Reading and sending chat messages, which is the entire job</li>
+      <li>Moderation actions: timeouts, bans, deleting messages</li>
+      <li>Event subscriptions for follows, subscriptions and raids, so alerts work</li>
+      <li>Reading your channel information, for uptime and category commands</li>
+    </ul>
+
+    <p><strong>Worth questioning:</strong></p>
+    <ul>
+      <li><strong>Editing your channel</strong> — changing title, category or tags. Convenient if you want a command for it, unnecessary otherwise.</li>
+      <li><strong>Managing channel points rewards</strong> — fine if you want point-triggered actions, but it is write access to something viewers spend real attention on.</li>
+      <li><strong>Anything touching payouts, subscriptions revenue, or your stream key</strong> — a chat bot has no business here. This one is close to a hard no.</li>
+    </ul>
+
+    <div class="note">
+      <span class="note__title">A habit worth forming</span>
+      <p>Revoke what you stop using. Twitch keeps a list of connected applications in your account settings, and most streamers have authorised half a dozen tools they tried once. Each is a standing key to your channel. Clearing them out once or twice a year takes two minutes.</p>
+    </div>
+
+    <h2>A sane order to set things up</h2>
+
+    <ol>
+      <li><strong>Moderation first.</strong> Turn on link filtering and caps limits. Leave the word list conservative; you can tighten it when something actually happens.</li>
+      <li><strong>Three commands.</strong> Not thirty. <code>!discord</code>, <code>!specs</code>, and whatever you personally get asked most. Add more when you notice yourself typing the same answer again.</li>
+      <li><strong>One timer.</strong> Your Discord or socials, on a long interval, with a minimum-lines rule so it stays quiet in a quiet room.</li>
+      <li><strong>Alerts.</strong> Follower and subscriber alerts, tested with the test button before you go live rather than during.</li>
+      <li><strong>Points, eventually.</strong> When you have regulars who would notice a leaderboard. Not before.</li>
+    </ol>
+
+    <p>The whole of that is about twenty minutes. The temptation is to spend an evening configuring forty commands nobody will ever type, which is a very enjoyable way to avoid streaming.</p>
+
+    <h2 id="who">Who wrote this</h2>
+
+    <div class="note note--who">
+      <span class="note__title">Disclosure</span>
+      <p>This page is published by <strong><a href="https://maxbot.tv/">MaxBot</a></strong>, which is a hosted Twitch and Discord bot platform with a visual overlay editor. We clearly have an interest in you concluding that hosted bots are sensible and that multi-channel handling matters, since those are the things we built.</p>
+      <p>We have tried to keep the page useful regardless. The permissions section argues for granting bots <em>less</em> access, including ours. The advice to add loyalty points last is advice to use fewer of our features, not more. And the honest position on self-hosting is that if you can code and want your data on your own disk, self-hosting is a perfectly good answer that we are not going to pretend is wrong.</p>
+      <p>MaxBot is made by <a href="https://maxolith.com.au/">Maxolith Studios</a>, an independent studio in Australia.</p>
+    </div>
+
+    <h2>Questions people ask</h2>
+
+    <div class="faq">
+      <details open>
+        <summary>What does a Twitch chat bot actually do?</summary>
+        <p>Four jobs: automated moderation, commands that answer repeated questions, timed messages, and tracking things like watch time or loyalty points. Many also drive on-screen alerts and overlays, which is a related but separate system.</p>
+      </details>
+      <details>
+        <summary>Do I need one as a small streamer?</summary>
+        <p>Yes, and earlier than you would think, though not for spam. A small channel has an attention problem rather than a spam problem: you cannot watch chat, play well and talk at once. Commands and timers buy that attention back.</p>
+      </details>
+      <details>
+        <summary>Hosted or self-hosted?</summary>
+        <p>Hosted suits almost everyone. It runs when your computer is off, needs no upkeep, and survives your machine crashing mid-stream. Self-host only if you need behaviour nobody offers, want viewer data on your own hardware, or are happy being on call for your own outages.</p>
+      </details>
+      <details>
+        <summary>Are overlays part of the chat bot?</summary>
+        <p>They are usually sold together but they are separate systems. The bot reads and writes chat; an overlay is a web page your broadcasting software loads as a browser source. They break independently, which is useful to know when something stops working.</p>
+      </details>
+      <details>
+        <summary>What permissions should I refuse?</summary>
+        <p>Anything touching your stream key, payouts or subscription revenue. Be deliberate about channel editing and channel points management too, since those are write access you may not need. Chat, moderation and event subscriptions are the job.</p>
+      </details>
+      <details>
+        <summary>How many commands should I set up?</summary>
+        <p>Start with three, and add one each time you notice yourself typing the same answer twice in a stream. Building forty commands in advance is a pleasant way to avoid going live, and most of them will never be typed.</p>
+      </details>
+      <details>
+        <summary>How often should timers post?</summary>
+        <p>Less often than you think, and ideally with a minimum number of chat lines between posts. A message every five minutes in a chat of eight people reads as a machine talking to an empty room.</p>
+      </details>
+      <details>
+        <summary>Can one bot handle Twitch and Discord together?</summary>
+        <p>Some can. The thing to check is whether it treats them as one account with several rooms or as unrelated setups, because the second means building and syncing every command twice by hand, and they will drift apart.</p>
+      </details>
+    </div>
+
+    <section class="next" aria-labelledby="h-next">
+      <h2 id="h-next">Where to go next</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Try a hosted one</h3>
+          <p>MaxBot runs Twitch and Discord from one account, with browser overlays you lay out in a visual editor.</p>
+          <a class="btn" href="https://maxbot.tv/">maxbot.tv</a>
+        </div>
+        <div class="card">
+          <h3>The studio behind it</h3>
+          <p>Maxolith Studios is an independent developer in Australia, making games and the tools around them.</p>
+          <a class="btn btn--ghost" href="https://maxolith.com.au/">maxolith.com.au</a>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Published by <a href="https://maxbot.tv/">MaxBot</a>, made by <a href="https://maxolith.com.au/">Maxolith Studios</a> in Australia. Written to be useful whether or not you ever use it.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+/* maxbot.css
+   Styling for the MaxBot guide. Self-contained like every other subject here.
+   A streamer reading about chat bots should not inherit the styling of a
+   voxel-terrain explainer or a gothic card game.
+
+   Broadcast register: deep slate, one electric accent, one warm signal colour.
+   Deliberately not Twitch purple: this page is about the category, not one
+   platform's brand, and borrowing their colour would imply endorsement. */
+
+:root{
+  --deck:#0C0F14; --deck-2:#131822; --panel:#19202B;
+  --line:rgba(126,158,196,.24); --line-soft:rgba(126,158,196,.12);
+  --white:#EAF0F7; --muted:#96A6BA; --dim:#6B7B90;
+  --volt:#38BDF8; --volt-lift:#7DD3FC;
+  --signal:#F0A03C;
+  --good:#4ADE80;
+  --display:"Barlow Condensed","Segoe UI",system-ui,sans-serif;
+  --body:"Rubik","Segoe UI",system-ui,sans-serif;
+  --measure:44rem;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--deck);color:var(--white);font-family:var(--body);
+  font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased}
+
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{left:8px;top:8px;position:fixed;z-index:99;background:var(--volt);
+  color:#06090d;padding:10px 14px}
+
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 22px}
+.wide{max-width:64rem}
+
+.stripes{height:3px;background:linear-gradient(90deg,var(--volt) 0%,var(--volt) 40%,
+  var(--signal) 40%,var(--signal) 68%,var(--good) 68%,var(--good) 100%)}
+
+.site-header{background:rgba(12,15,20,.93);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
+.site-header__inner{display:flex;align-items:center;gap:16px;padding:14px 22px;
+  max-width:var(--measure);margin:0 auto}
+.brand{display:flex;flex-direction:column;gap:1px;text-decoration:none}
+.brand__name{font-family:var(--display);font-weight:700;font-size:21px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.brand__note{font-size:12px;color:var(--dim)}
+.nav{margin-left:auto;display:flex;gap:16px;font-size:13.5px}
+.nav a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+.nav a:hover,.nav a:focus-visible{color:var(--white);border-bottom-color:var(--volt)}
+
+.crumbs{font-size:12.5px;color:var(--dim);padding-top:20px}
+.crumbs a{color:var(--muted)}
+
+.masthead{padding:34px 0 6px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,54px);
+  line-height:1.08;margin:0 0 16px;text-wrap:balance;letter-spacing:.005em}
+.standfirst{font-size:19px;color:var(--muted);margin:0 0 20px;line-height:1.7}
+.byline{font-size:13px;color:var(--dim);border-top:1px solid var(--line-soft);
+  padding-top:14px;margin-bottom:8px}
+
+.prose h2{font-family:var(--display);font-weight:700;font-size:31px;line-height:1.2;
+  margin:44px 0 12px;letter-spacing:.01em}
+.prose h3{font-size:19px;font-weight:600;margin:28px 0 8px}
+.prose p{margin:0 0 18px}
+.prose ul,.prose ol{margin:0 0 18px;padding-left:22px}
+.prose li{margin-bottom:9px}
+.prose strong{color:#fff;font-weight:600}
+.prose em{color:var(--volt-lift);font-style:italic}
+.prose a{color:var(--volt-lift);text-underline-offset:3px}
+.prose a:hover,.prose a:focus-visible{color:var(--white)}
+.prose code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;
+  background:var(--panel);padding:2px 6px;border:1px solid var(--line-soft)}
+
+.table-wrap{overflow-x:auto;margin:0 0 22px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);
+  font-weight:600;background:var(--deck-2)}
+tbody tr:last-child td{border-bottom:none}
+.yes{color:var(--good);font-weight:600}
+.no{color:var(--signal);font-weight:600}
+
+.note{border:1px solid var(--line);background:var(--deck-2);padding:18px 20px;margin:0 0 22px}
+.note--warn{border-color:rgba(240,160,60,.5);background:rgba(240,160,60,.07)}
+.note--who{border-color:rgba(56,189,248,.45);background:rgba(56,189,248,.06)}
+.note__title{display:block;font-family:var(--display);font-size:13px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--volt);margin-bottom:7px}
+.note p:last-child{margin-bottom:0}
+
+.faq{margin-top:14px}
+.faq details{border-bottom:1px solid var(--line-soft)}
+.faq summary{cursor:pointer;padding:15px 0;font-weight:600;font-size:17px;
+  list-style:none;display:flex;gap:12px;align-items:baseline}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"+";color:var(--volt);font-weight:700;flex:none}
+.faq details[open] summary::before{content:"\2212"}
+.faq summary:hover{color:#fff}
+.faq p{margin:0 0 16px;padding-left:24px;color:var(--muted)}
+
+.next{margin:52px 0 20px;border-top:1px solid var(--line);padding-top:28px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--panel);border:1px solid var(--line-soft);padding:18px}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0 0 12px;font-size:14.5px;color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--volt);color:#06090d;
+  text-decoration:none;font-weight:700;font-size:14px;padding:10px 17px;border:1px solid var(--volt)}
+.btn:hover,.btn:focus-visible{background:var(--volt-lift);border-color:var(--volt-lift)}
+.btn--ghost{background:none;color:var(--volt-lift);border:1px solid var(--line)}
+.btn--ghost:hover,.btn--ghost:focus-visible{color:var(--white);border-color:var(--volt);background:none}
+
+.site-footer{margin-top:60px;border-top:1px solid var(--line);padding:26px 0 60px;
+  font-size:13.5px;color:var(--dim)}
+.site-footer a{color:var(--muted)}
+
+a:focus-visible,summary:focus-visible{outline:2px solid var(--volt);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto};*{transition:none!important}}
+@media(max-width:620px){
+  body{font-size:16.5px}
+  .prose h2{font-size:27px}
+  .nav{gap:12px;font-size:13px}
+}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Why some survival games let you dig anywhere, and others only pretend to</title>
+<meta name="description" content="Heightmaps, blocks, marching cubes and surface nets, explained without the maths: why most survival games have a solid floor you can never break, why the ones that let you dig look like cubes, and what smooth voxel terrain costs to build.">
+<link rel="canonical" href="https://maaaaaaxx.github.io/website/digging-in-survival-games.html">
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Fellmark">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Fellmark Guides">
+<meta property="og:locale" content="en_AU">
+<meta property="og:title" content="Why some survival games let you dig anywhere">
+<meta property="og:description" content="Heightmaps, blocks and smooth voxels explained without the maths, and what each one costs the people building it.">
+<meta property="og:url" content="https://maaaaaaxx.github.io/website/digging-in-survival-games.html">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why some survival games let you dig anywhere">
+<meta name="twitter:description" content="The difference between a heightmap, a block world and smooth voxel terrain, and why it decides whether you can dig.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/fellmark.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Why some survival games let you dig anywhere, and others only pretend to",
+  "description": "An explanation of the three ways games represent ground: heightmaps, block voxels and smooth voxels, and why that choice decides whether a player can dig a tunnel.",
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "inLanguage": "en-AU",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://maaaaaaxx.github.io/website/digging-in-survival-games.html" },
+  "author": { "@type": "Organization", "name": "Fellmark", "url": "https://fellmark.net/" },
+  "publisher": { "@type": "Organization", "name": "Fellmark", "url": "https://fellmark.net/" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why can't I dig in most survival games?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because the ground is a heightmap, not a solid. A heightmap stores one height value per point on a grid, which describes a surface but has no underneath. There is nothing beneath the floor to remove, so digging is not disabled as a rule; it is impossible by construction. Games built this way can only fake holes by placing pre-made cave models under the surface." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is voxel terrain?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Voxel terrain stores the world as a three-dimensional grid of values rather than a surface. Every point in space, including underground, holds a value describing how solid it is. Because the data exists all the way down, removing some of it is meaningful, which is what makes digging possible." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Minecraft look like cubes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because each voxel is treated as either fully solid or fully empty, and drawn as a cube face. That binary choice makes the world trivially easy to store, edit and reason about, and it is why block games run well and are simple to build for. The blocky look is a direct consequence of the data, not an art decision layered on top." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are marching cubes and surface nets?",
+      "acceptedAnswer": { "@type": "Answer", "text": "They are algorithms that turn a voxel grid into a smooth surface instead of cubes, by treating each voxel's value as a density and placing a triangle mesh where the density crosses a threshold. Marching cubes is the older and better known; surface nets generally produces fewer, better-shaped triangles and is easier to keep consistent between chunks." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why don't more games use smooth voxel terrain?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because it is substantially more expensive in every direction: more memory per chunk, a meshing step whenever terrain changes, harder collision, harder level-of-detail, and no off-the-shelf tooling. A heightmap gets you a good-looking world in an afternoon. Smooth voxels are a long-term commitment made early, and they are difficult to retrofit." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="stripes"></div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="https://fellmark.net/">
+      <span class="brand__name">Fellmark</span>
+      <span class="brand__note">Published by Fellmark, written to stand on its own</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="https://fellmark.net/">fellmark.net</a>
+      <a href="#who">Disclosure</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="https://fellmark.net/">Fellmark</a> &rsaquo; Digging in survival games
+    </nav>
+    <div class="masthead">
+      <h1>Why some survival games let you dig anywhere, and others only pretend to</h1>
+      <p class="standfirst">You have probably hit an invisible floor in a survival game and wondered why. The answer is not a design decision about balance. It is a decision made about data, usually years earlier, and it cannot be undone later.</p>
+      <p class="byline">Published 13 September 2026 &middot; Written by the team building Fellmark &middot; Read <a href="#who">the disclosure</a> before you weigh anything below</p>
+    </div>
+  </div>
+
+  <article class="wrap prose">
+
+    <div class="note">
+      <span class="note__title">The short version</span>
+      <p>There are three common ways to represent ground. A <strong>heightmap</strong> is a surface with no underneath, so you can never dig. <strong>Block voxels</strong> store solid-or-empty cells, so you can dig, and everything looks like cubes. <strong>Smooth voxels</strong> store density and build a surface from it, so you can dig and it looks natural, at a cost paid every day by whoever is building the game.</p>
+    </div>
+
+    <h2>The floor you cannot break</h2>
+
+    <p>Most survival and open-world games represent the ground as a <strong>heightmap</strong>. It is the oldest approach and by far the most common, because it is cheap, fast and looks excellent.</p>
+
+    <p>A heightmap is a grid laid over the world where each point stores a single number: how high the ground is there. Draw a surface through those points and you have convincing hills, valleys and cliffs, using very little memory.</p>
+
+    <p>The limitation is in the definition. One height per point means the ground is a <em>surface</em>, not a <em>volume</em>. There is no data describing what is underneath, because there is no underneath. Asking a heightmap to let you dig is like asking a photograph what is behind the wall.</p>
+
+    <p>So when a game refuses to let you break the floor, it is usually not withholding a feature. There is nothing there to remove.</p>
+
+    <h3>How caves get faked</h3>
+
+    <p>Games built on heightmaps still have caves, and they are made the way a film set is made: someone builds a cave as a separate model and places it under a hole cut in the terrain. It looks convincing because an artist made it convincing.</p>
+
+    <p>What you cannot do is dig your own. The cave exists where it was placed and nowhere else, and the boundary between the sculpted piece and the generated ground is why cave mouths in these games so often look like doorways.</p>
+
+    <h2>Voxels: ground that has an inside</h2>
+
+    <p><strong>Voxel terrain</strong> stores the world as a three-dimensional grid. Instead of one height per point on a flat grid, every point <em>in space</em> holds a value, including all the points below the surface.</p>
+
+    <p>That is the whole idea, and everything else follows from it. Because the data continues underground, removing some of it means something. The ground has an inside, so the inside can be changed.</p>
+
+    <h3>Block voxels, and why they look like blocks</h3>
+
+    <p>The simplest version stores one bit per cell: solid or empty. Draw every solid cell as a cube and you have a block world.</p>
+
+    <p>This is not an art style that was chosen and then implemented. It is what the data looks like when you draw it directly. The aesthetic is downstream of a storage decision, which is part of why it has been so widely imitated: the look and the simplicity arrive together.</p>
+
+    <p>And the simplicity is genuinely valuable. Solid-or-empty cells are trivial to store, trivial to edit, trivial to network, and easy to reason about when something goes wrong. A block world is the most forgiving way to build a game where players reshape the world.</p>
+
+    <h3>Smooth voxels, and what they cost</h3>
+
+    <p>The alternative stores a <em>density</em> in each cell rather than a yes or no. A cell might be 0.8 solid. The surface is then drawn wherever the density crosses a threshold, which produces a continuous shape rather than a staircase.</p>
+
+    <p>Two algorithms dominate:</p>
+
+    <ul>
+      <li><strong>Marching cubes</strong> is the classic. For each little cube of eight neighbouring density values, it looks up which triangles to emit from a table of cases. It is well documented and everywhere.</li>
+      <li><strong>Surface nets</strong> places a single vertex inside each cell and connects neighbours. It generally produces fewer and better-shaped triangles, and tends to be easier to keep consistent across chunk boundaries, which is where these systems usually break.</li>
+    </ul>
+
+    <p>The result is terrain that looks like ground rather than like a staircase, and that you can still dig through. You get both, and you pay for both.</p>
+
+    <h2>What each approach actually costs</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>&nbsp;</th><th>Heightmap</th><th>Block voxels</th><th>Smooth voxels</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Can you dig?</strong></td><td class="no">No</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td><strong>Natural-looking ground</strong></td><td class="yes">Yes</td><td class="no">Cubes</td><td class="yes">Yes</td></tr>
+          <tr><td><strong>Memory per area</strong></td><td>Very low</td><td>Moderate</td><td>High</td></tr>
+          <tr><td><strong>Cost of an edit</strong></td><td>N/A</td><td>Cheap</td><td>Re-mesh the chunk</td></tr>
+          <tr><td><strong>Collision</strong></td><td>Trivial</td><td>Trivial</td><td>Must be rebuilt with the mesh</td></tr>
+          <tr><td><strong>Distant terrain (LOD)</strong></td><td>Solved, built in</td><td>Awkward</td><td>Genuinely hard</td></tr>
+          <tr><td><strong>Engine tooling</strong></td><td>Extensive</td><td>Some</td><td class="no">Essentially none</td></tr>
+          <tr><td><strong>Multiplayer sync</strong></td><td>Nothing to sync</td><td>Small, simple edits</td><td>Larger, fiddlier edits</td></tr>
+          <tr><td><strong>Time to something playable</strong></td><td>An afternoon</td><td>Weeks</td><td class="no">Months</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note note--warn">
+      <span class="note__title">The one that surprises people</span>
+      <p>Level of detail is the hardest of these, not memory. Distant terrain must be drawn with fewer triangles, and when a chunk drawn at low detail meets one drawn at high detail, the surfaces do not line up. The result is a crack you can see through, straight into the sky or the void. Every smooth-voxel project meets this problem, and the solutions are all some flavour of compromise.</p>
+    </div>
+
+    <h2>Why so few games do it</h2>
+
+    <p>Given that smooth voxels give you diggable ground <em>and</em> a natural look, the obvious question is why it is not standard.</p>
+
+    <p>The answer is that it is not one feature, it is a permanent tax on everything else.</p>
+
+    <ul>
+      <li><strong>Nothing comes for free.</strong> Engines ship excellent heightmap terrain with sculpting tools, texture layers, foliage scattering and LOD already working. Choose voxels and you are writing all of that yourself.</li>
+      <li><strong>Every system meets the terrain.</strong> Pathfinding, water, foliage, building placement, saving. Each one has to understand a world that can change shape.</li>
+      <li><strong>It cannot be retrofitted.</strong> This is the real reason. Terrain is so deeply entangled with everything else that swapping it out late means rewriting the game. The choice is effectively made in the first month.</li>
+      <li><strong>Players do not ask for it by name.</strong> They ask to dig a tunnel. A studio weighing months of work against a feature nobody can name usually, and reasonably, declines.</li>
+    </ul>
+
+    <h2>How to tell which one a game uses</h2>
+
+    <p>You can usually work it out in the first ten minutes without reading a word of documentation.</p>
+
+    <h3>Try to dig straight down</h3>
+    <p>Not at a marked cave mouth. In a field, in the open. If there is no tool for it at all, you are on a heightmap. If you make a hole, it is voxels of some kind.</p>
+
+    <h3>Look at the hole you made</h3>
+    <p>Cube-shaped, axis-aligned, stepped? Block voxels. Curved, sloped, following the shape of your tool? Smooth voxels.</p>
+
+    <h3>Look at a cave entrance</h3>
+    <p>If entrances all look similar, sit at consistent angles and feel placed, they are probably models sitting under a heightmap. If they are irregular, occasionally awkward, and sometimes open where nothing interesting is, they were generated in the volume.</p>
+
+    <h3>Watch what happens when you fill something in</h3>
+    <p>Dig a hole, then put the material back. On block voxels you get your cube back exactly. On smooth voxels the shape will be close but not identical, because you are adding density back into a continuous field rather than replacing a discrete object.</p>
+
+    <h2 id="who">Who wrote this</h2>
+
+    <div class="note note--who">
+      <span class="note__title">Disclosure</span>
+      <p>This page is published by <strong><a href="https://fellmark.net/">Fellmark</a></strong>, a survival game built on full smooth voxel terrain using surface nets, with one-metre cells and thirty-two-metre chunks. We chose the expensive option knowingly, and we obviously think it was worth it, so treat the enthusiasm accordingly.</p>
+      <p>We have tried to be straight about the costs, because we have paid all of them. The level-of-detail problem above is not a hypothetical we read about. Nothing here argues that heightmap games are lazy or worse: a heightmap is the right answer for most games, and choosing it is usually good judgement rather than a shortcut.</p>
+      <p>Fellmark is made by <a href="https://maxolith.com.au/">Maxolith Studios</a>, an independent studio in Australia.</p>
+    </div>
+
+    <h2>Questions people ask</h2>
+
+    <div class="faq">
+      <details open>
+        <summary>Why can't I dig in most survival games?</summary>
+        <p>Because the ground is a heightmap: one height value per point on a grid, describing a surface with no underneath. There is no data below the floor to remove. Digging is not switched off, it is impossible by construction.</p>
+      </details>
+      <details>
+        <summary>What is voxel terrain?</summary>
+        <p>A world stored as a three-dimensional grid, where every point in space, including underground, holds a value describing how solid it is. Because the data exists all the way down, changing it is meaningful, and digging becomes possible.</p>
+      </details>
+      <details>
+        <summary>Why does Minecraft look like cubes?</summary>
+        <p>Because each cell is stored as fully solid or fully empty and drawn as a cube face. The look is a direct consequence of the simplest possible voxel storage, not an art style applied afterwards.</p>
+      </details>
+      <details>
+        <summary>What are marching cubes and surface nets?</summary>
+        <p>Two ways of turning a grid of density values into a smooth surface. Marching cubes emits triangles per cell from a lookup table. Surface nets places one vertex per cell and joins neighbours, usually producing fewer, better-shaped triangles and behaving better at chunk boundaries.</p>
+      </details>
+      <details>
+        <summary>Is voxel terrain bad for performance?</summary>
+        <p>It is more expensive than a heightmap, but the cost is rarely raw rendering. It is the meshing step whenever terrain changes, rebuilding collision to match, and drawing distant terrain cheaply without cracks appearing between detail levels.</p>
+      </details>
+      <details>
+        <summary>Can a game add digging later?</summary>
+        <p>Almost never. Terrain touches pathfinding, water, foliage, building, saving and networking, so replacing it late means rewriting most of the game. In practice the decision is made in the first month of development and lived with.</p>
+      </details>
+      <details>
+        <summary>How do I tell which one a game is using?</summary>
+        <p>Dig straight down in an open field. No tool for it means heightmap. A stepped, axis-aligned hole means block voxels. A curved hole that follows your tool means smooth voxels.</p>
+      </details>
+    </div>
+
+    <section class="next" aria-labelledby="h-next">
+      <h2 id="h-next">Where to go next</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>See it in practice</h3>
+          <p>Fellmark is a Nordic survival game on full smooth voxel terrain: dig anywhere, find caves and underground biomes, work ten tiers of ore.</p>
+          <a class="btn" href="https://fellmark.net/">fellmark.net</a>
+        </div>
+        <div class="card">
+          <h3>The studio behind it</h3>
+          <p>Maxolith Studios is an independent developer in Australia, making Fellmark and Hollowcross.</p>
+          <a class="btn btn--ghost" href="https://maxolith.com.au/">maxolith.com.au</a>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Published by <a href="https://fellmark.net/">Fellmark</a>, a game made by <a href="https://maxolith.com.au/">Maxolith Studios</a> in Australia. Written to be useful whether or not you ever play it.</p>
+  </div>
+</footer>
+
+</body>
+</html>

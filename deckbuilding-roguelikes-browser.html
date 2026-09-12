@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Deckbuilding roguelikes you can play in a browser, without installing anything</title>
+<meta name="description" content="What a deckbuilding roguelike actually is, why almost all of them need an install, and what changes when one runs in a browser tab instead: saves, offline play, performance and input. An honest look at what browser delivery gains you and what it costs.">
+<link rel="canonical" href="https://maaaaaaxx.github.io/website/deckbuilding-roguelikes-browser.html">
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Hollowcross">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Hollowcross Guides">
+<meta property="og:locale" content="en_AU">
+<meta property="og:title" content="Deckbuilding roguelikes you can play in a browser">
+<meta property="og:description" content="Why nearly every deckbuilder needs an install, what browser delivery changes, and how to judge one that runs in a tab.">
+<meta property="og:url" content="https://maaaaaaxx.github.io/website/deckbuilding-roguelikes-browser.html">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deckbuilding roguelikes that run in a browser">
+<meta name="twitter:description" content="What a deckbuilding roguelike is, and what actually changes when one runs in a tab instead of an install.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/hollowcross.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Deckbuilding roguelikes you can play in a browser, without installing anything",
+  "description": "An explanation of the deckbuilding roguelike form, why the genre defaulted to native installs, and what browser delivery changes in practice: save persistence, offline play, performance and input.",
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "inLanguage": "en-AU",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://maaaaaaxx.github.io/website/deckbuilding-roguelikes-browser.html" },
+  "author": { "@type": "Organization", "name": "Hollowcross", "url": "https://hollowcross.com/" },
+  "publisher": { "@type": "Organization", "name": "Hollowcross", "url": "https://hollowcross.com/" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a deckbuilding roguelike?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A deckbuilding roguelike is a game in which you start each run with a small, weak deck of cards and add to it as you go, while the run itself is structured like a roguelike: procedurally arranged encounters, permanent consequences within the run, and a full reset when you lose. The deck is the character. You are not levelling a hero, you are assembling a machine out of the cards the run happens to offer you." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you play deckbuilding roguelikes in a browser?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The genre is unusually well suited to the browser because it is turn-based, mostly two-dimensional and needs no fast input. The constraint is not graphics but persistence: a browser game has to store your run on a server or in browser storage rather than in a save file, so account handling matters more than frame rate." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are browser card games worse than installed ones?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not inherently, for this genre. A turn-based card game asks very little of a GPU, so the usual browser penalty barely applies. What you genuinely give up is reliable offline play, storefront features like achievements and cloud saves, and the assurance that the game still exists on your disk if the site goes away." }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I look for in a deckbuilding roguelike?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Three things: whether you can remove cards from your deck as well as add them, whether the run offers real choices rather than a single path, and whether losing teaches you something. A deckbuilder without card removal turns into a shuffling problem, and a run without branching is a sequence rather than a decision." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long is a run in a deckbuilding roguelike?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most sit between thirty minutes and two hours for a complete run. That length is deliberate: long enough that a deck has time to become something, short enough that losing it is survivable. Games that run much longer tend to add mid-run saves, because asking someone to hold four hours in one sitting loses more players than it keeps." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="stripes"></div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="https://hollowcross.com/">
+      <span class="brand__name">Hollowcross</span>
+      <span class="brand__note">Published by Hollowcross, written to stand on its own</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="https://hollowcross.com/">hollowcross.com</a>
+      <a href="#who">Disclosure</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="https://hollowcross.com/">Hollowcross</a> &rsaquo; Deckbuilding roguelikes in a browser
+    </nav>
+    <div class="masthead">
+      <h1>Deckbuilding roguelikes you can play in a browser, without installing anything</h1>
+      <p class="standfirst">The genre grew up on Steam, and most of it still lives there. But a turn-based card game is close to the ideal thing to run in a tab, and the reasons it usually doesn't are historical rather than technical.</p>
+      <p class="byline">Published 13 September 2026 &middot; Written by the team behind Hollowcross &middot; Read <a href="#who">the disclosure</a> before you weigh anything below</p>
+    </div>
+  </div>
+
+  <article class="wrap prose">
+
+    <div class="note">
+      <span class="note__title">The short version</span>
+      <p>Deckbuilding roguelikes ask almost nothing of your hardware, so the browser costs you very little in fidelity. What it costs you is <strong>persistence and ownership</strong>: no save file you control, no guaranteed offline play, and a game that exists only as long as someone keeps the lights on. Whether that trade is worth it depends entirely on whether you can install software on the machine you actually want to play on.</p>
+    </div>
+
+    <h2>What a deckbuilding roguelike actually is</h2>
+
+    <p>A <strong>deckbuilding roguelike</strong> is a game in which you begin each run with a small, deliberately weak deck of cards, and build it into something dangerous over the course of that run. When the run ends, the deck is gone. You start again with the same small, weak deck.</p>
+
+    <p>That last part is what makes it a roguelike rather than a card game with a campaign. The deck is not saved between attempts. Anything you learned, you carry in your head.</p>
+
+    <p>Two things are happening at once, and the tension between them is the whole genre:</p>
+
+    <ul>
+      <li><strong>The deck is your character.</strong> You are not levelling a hero with a skill tree. You are assembling a machine out of whatever parts the run offers, and the parts on offer are not the ones you would have chosen.</li>
+      <li><strong>The run is a series of forced decisions.</strong> Which path to take, which reward to accept, which fight to risk. A good run makes you choose between two things you want, not between a good option and a bad one.</li>
+    </ul>
+
+    <p>The form is usually traced to <em>Dream Quest</em>, a game that looked like it was drawn in a hurry and played like nothing else at the time. <em>Slay the Spire</em> is what made the shape legible to everyone else, and most of what followed is in conversation with it one way or another.</p>
+
+    <h3>Why adding cards is only half of it</h3>
+
+    <p>The counterintuitive part, and the thing that separates a good deckbuilder from a frustrating one, is that <strong>a bigger deck is usually a worse deck</strong>.</p>
+
+    <p>If your deck has ten cards and three of them win the game, you see one of those three often. If your deck has forty cards and six of them win the game, you see them less. Adding a card that is merely good dilutes the cards that are excellent.</p>
+
+    <p>This is why card <em>removal</em> matters as much as card acquisition, and why a game that only ever lets you add is quietly broken. Without a way to thin the deck, the correct play becomes declining almost every reward, which feels terrible and looks like the game is punishing you for engaging with it.</p>
+
+    <div class="note note--warn">
+      <span class="note__title">The test that separates them</span>
+      <p>When you are offered a card, ask whether you would rather have <em>nothing</em>. If the answer is frequently yes and the game gives you no way to remove cards later, the deckbuilding is decorative. You are managing a shuffling problem, not building anything.</p>
+    </div>
+
+    <h2>Why the genre defaulted to installs</h2>
+
+    <p>There is no technical reason a deckbuilding roguelike needs to be installed. These games are turn-based. They render a handful of cards, some text and a background. A machine from a decade ago runs them comfortably.</p>
+
+    <p>The reason is commercial and historical. The genre found its audience on Steam during a period when Steam was where paid indie games went to be discovered, and browser games carried a reputation earned in the era of ad-stuffed portals. Developers went where the buyers and the wishlists were, and the tooling followed them there.</p>
+
+    <p>That reputational problem has largely dissolved. What remains are real, specific trade-offs worth understanding before you decide a tab is good enough.</p>
+
+    <h2>What actually changes in a browser</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Concern</th><th>Installed game</th><th>Browser game</th><th>Does it matter here?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Performance</strong></td>
+            <td>Direct GPU access</td>
+            <td>Sandboxed, slower ceiling</td>
+            <td class="no">Barely. A turn-based card game does not approach the ceiling either way.</td>
+          </tr>
+          <tr>
+            <td><strong>Saves</strong></td>
+            <td>A file you own, on your disk</td>
+            <td>Server-side account, or browser storage</td>
+            <td class="yes">Yes. This is the real difference.</td>
+          </tr>
+          <tr>
+            <td><strong>Offline play</strong></td>
+            <td>Works on a plane</td>
+            <td>Usually needs a connection</td>
+            <td class="yes">Yes, if you play in transit.</td>
+          </tr>
+          <tr>
+            <td><strong>Longevity</strong></td>
+            <td>Yours until the disk dies</td>
+            <td>Exists while the site does</td>
+            <td class="yes">Yes, and it is rarely discussed honestly.</td>
+          </tr>
+          <tr>
+            <td><strong>Install friction</strong></td>
+            <td>Download, install, patch</td>
+            <td>Click a link</td>
+            <td class="yes">Yes, in the browser's favour.</td>
+          </tr>
+          <tr>
+            <td><strong>Locked-down machines</strong></td>
+            <td>Often impossible</td>
+            <td>Usually fine</td>
+            <td class="yes">Yes, and this is the strongest argument.</td>
+          </tr>
+          <tr>
+            <td><strong>Storefront features</strong></td>
+            <td>Achievements, cloud saves, refunds</td>
+            <td>Whatever the site built</td>
+            <td>Depends how much you value them.</td>
+          </tr>
+          <tr>
+            <td><strong>Input</strong></td>
+            <td>Full controller support common</td>
+            <td>Mouse and touch, mostly</td>
+            <td class="no">Not much. The genre is a pointing genre.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The save question is the one to actually think about</h3>
+
+    <p>An installed game writes a file. You can back it up, move it to another machine, and open it in five years.</p>
+
+    <p>A browser game has two choices, and the difference between them is substantial:</p>
+
+    <ul>
+      <li><strong>Browser storage</strong> (<code>localStorage</code> or IndexedDB) keeps your progress on that one device, in that one browser. Clear your site data, switch to a private window, or move to your phone, and it is gone. No warning, no recovery.</li>
+      <li><strong>A server-side account</strong> keeps your progress attached to a login. It follows you between devices, survives a cleared cache, and can be restored. It also means the game knows who you are, and that you are trusting someone else to keep the record.</li>
+    </ul>
+
+    <p>If a browser game asks you to sign in and you are irritated by that, it is worth knowing that the alternative is usually not "no account, same result". The alternative is a run that vanishes when your browser decides to tidy up.</p>
+
+    <h3>Why "it runs on a work laptop" is the real selling point</h3>
+
+    <p>The argument for browser delivery that survives scrutiny is not convenience. It is <strong>access</strong>.</p>
+
+    <p>A great many machines cannot install software: managed work laptops, school and university computers, library terminals, locked-down Chromebooks. On those machines, an installed game is not a worse option. It is not an option.</p>
+
+    <p>That is a smaller audience than "everyone who owns a PC", but it is an audience the installed genre simply cannot reach.</p>
+
+    <h2>How to judge one in the first ten minutes</h2>
+
+    <p>Whether it runs in a tab or not, the same questions tell you quickly whether a deckbuilder is worth your evening.</p>
+
+    <h3>Can you remove cards?</h3>
+    <p>Look for it explicitly. Somewhere in the run there should be a way to delete a card from your deck, usually at a cost. If there is not, expect the middle of every run to feel like wading.</p>
+
+    <h3>Does the map branch?</h3>
+    <p>You should be choosing a path, not walking one. If every run visits the same encounters in the same order, the procedural generation is decoration and the replay value is thinner than it looks.</p>
+
+    <h3>Does losing tell you why?</h3>
+    <p>A good run ends with a diagnosis you can state in a sentence: you took too many cards, you skipped the removal, you gambled on a synergy that never arrived. If a loss feels arbitrary, either the game is hiding information it should show, or the randomness is doing too much work.</p>
+
+    <h3>Is there something to pull you back?</h3>
+    <p>Most of the genre unlocks new cards or characters as you play, so early losses still move something forward. This is a compromise with human psychology rather than a design ideal, and games that refuse it entirely tend to be admired more than they are played.</p>
+
+    <div class="note">
+      <span class="note__title">A reasonable first session</span>
+      <p>Play three runs. Lose all three, which you will. If by the third you are losing <em>differently</em> and can explain what you would do next time, the game is teaching you and it is worth continuing. If you are losing the same way and cannot say why, it probably is not for you, and that is a legitimate answer rather than a skill problem.</p>
+    </div>
+
+    <h2 id="who">Who wrote this</h2>
+
+    <div class="note note--who">
+      <span class="note__title">Disclosure</span>
+      <p>This page is published by <strong><a href="https://hollowcross.com/">Hollowcross</a></strong>, which is a deckbuilding roguelike that runs in a browser. We have an obvious interest in you thinking browser delivery is reasonable, and you should read the section on trade-offs with that in mind.</p>
+      <p>We have tried to write the page we would have wanted before we started: the save-persistence problem is stated plainly, including the part where a browser game disappears if the people running it stop, because pretending otherwise would be dishonest. Nothing above is a claim that installed games are worse. For most people, on most machines, an installed game is the better default.</p>
+      <p>Hollowcross is made by <a href="https://maxolith.com.au/">Maxolith Studios</a>, an independent studio in Australia.</p>
+    </div>
+
+    <h2>Questions people ask</h2>
+
+    <div class="faq">
+      <details open>
+        <summary>What is a deckbuilding roguelike?</summary>
+        <p>A game where you start each run with a small, weak deck and add to it as you go, inside a roguelike structure: procedurally arranged encounters, consequences that persist within the run, and a full reset when you lose. The deck is the character rather than a resource the character uses.</p>
+      </details>
+      <details>
+        <summary>Can you really play these in a browser?</summary>
+        <p>Yes, and the genre suits it unusually well. These games are turn-based, mostly two-dimensional, and need no fast input, so the usual browser performance penalty barely applies. The real constraint is persistence, not rendering.</p>
+      </details>
+      <details>
+        <summary>Are browser card games worse than installed ones?</summary>
+        <p>Not in fidelity, for this genre specifically. What you give up is reliable offline play, storefront features like achievements and cloud saves, and the certainty that the game is still on your disk if the site goes away.</p>
+      </details>
+      <details>
+        <summary>Do I need an account to play one?</summary>
+        <p>Usually, if you want your progress to survive. Without an account, a browser game has to store your run in browser storage, which disappears when site data is cleared and does not follow you to another device. An account is the price of a save that persists.</p>
+      </details>
+      <details>
+        <summary>How long is a single run?</summary>
+        <p>Typically thirty minutes to two hours. Long enough for a deck to become something, short enough that losing it does not feel like losing an evening. Games that run substantially longer usually add mid-run saves.</p>
+      </details>
+      <details>
+        <summary>Why is a bigger deck usually worse?</summary>
+        <p>Because adding a merely good card reduces how often you draw your best ones. If three of ten cards win the game, you see them often; if six of forty do, you see them less. This is why the ability to remove cards matters as much as the ability to add them.</p>
+      </details>
+      <details>
+        <summary>What if I cannot install software on my computer?</summary>
+        <p>Then the browser is not a compromise, it is the only door. Managed work laptops, school machines, library terminals and locked-down Chromebooks can all run a browser game and none of them can run an installer.</p>
+      </details>
+    </div>
+
+    <section class="next" aria-labelledby="h-next">
+      <h2 id="h-next">Where to go next</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Try one in a tab</h3>
+          <p>Hollowcross is a gothic deckbuilder that runs in the browser, free, with no install. There is a desktop client on Steam if you would rather have the file.</p>
+          <a class="btn" href="https://hollowcross.com/">Play Hollowcross</a>
+        </div>
+        <div class="card">
+          <h3>The studio behind it</h3>
+          <p>Maxolith Studios is an independent developer in Australia, making Hollowcross and Fellmark.</p>
+          <a class="btn btn--ghost" href="https://maxolith.com.au/">maxolith.com.au</a>
+        </div>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Published by <a href="https://hollowcross.com/">Hollowcross</a>, a game made by <a href="https://maxolith.com.au/">Maxolith Studios</a> in Australia. Written to be useful whether or not you ever play it.</p>
+  </div>
+</footer>
+
+</body>
+</html>
