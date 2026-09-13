@@ -60,3 +60,4 @@ User-agent: Bingbot
 Allow: /
 
 Sitemap: https://maaaaaaxx.github.io/website/sitemap.xml
+Sitemap: https://maaaaaaxx.github.io/website/sitemap/sitemap.xml
