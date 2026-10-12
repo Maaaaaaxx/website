@@ -62,10 +62,18 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Fellmark (game hub) -->
+  <url>
+    <loc>https://maaaaaaxx.github.io/website/fellmark.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Voxel terrain -->
   <url>
     <loc>https://maaaaaaxx.github.io/website/digging-in-survival-games.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

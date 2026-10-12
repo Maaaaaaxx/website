@@ -25,17 +25,6 @@
   Search Console reports the sitemap as containing URLs on a different host
   and ignores it.
 
-  NOTE ON LOCATION
-  This copy lives at /website/sitemap/sitemap.xml. The identical file is also
-  served from /website/sitemap.xml, and both are kept deliberately: the root
-  copy is the one already submitted to Search Console, and removing it would
-  404 a live submission.
-
-  Be aware that Google scopes a sitemap to its own directory and below. Every
-  <loc> here sits at /website/, which is ABOVE this file, so the root copy is
-  the safer one to submit. This copy works because the property is verified,
-  but it is the more fragile of the two.
-
   Submit at https://search.google.com/search-console for the github.io
   property, and at Bing Webmaster Tools. Resubmitting after adding pages is
   not required - Google re-reads the sitemap on its own schedule - but it is
@@ -73,10 +62,18 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Fellmark (game hub) -->
+  <url>
+    <loc>https://maaaaaaxx.github.io/website/fellmark.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Voxel terrain -->
   <url>
     <loc>https://maaaaaaxx.github.io/website/digging-in-survival-games.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
