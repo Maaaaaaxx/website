@@ -5,24 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>How to clip the last few minutes of gameplay on Windows, on any GPU</title>
-<meta name="description" content="Every way to save the last few minutes of gameplay after it has already happened: NVIDIA Instant Replay, AMD Radeon, Xbox Game Bar, OBS's replay buffer, Medal and Radium. What a replay buffer actually is, why the capture method decides whether you lose frames, and which tool suits which machine.">
+<meta name="description" content="Every way to save the last few minutes of gameplay after it has already happened: NVIDIA Instant Replay, AMD Radeon, Xbox Game Bar, OBS's replay buffer, Medal and LensCap. What a replay buffer actually is, why the capture method decides whether you lose frames, and which tool suits which machine.">
 <link rel="canonical" href="https://maaaaaaxx.github.io/website/game-clip-recorders.html">
 
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<meta name="author" content="Radium">
+<meta name="author" content="LensCap">
 
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="Radium Guides">
+<meta property="og:site_name" content="LensCap Guides">
 <meta property="og:locale" content="en_AU">
 <meta property="og:title" content="How to clip the last few minutes of gameplay on Windows">
-<meta property="og:description" content="Replay buffers explained, and an honest comparison of NVIDIA, AMD, Game Bar, OBS, Medal and Radium — including why the capture method is what costs you frames.">
+<meta property="og:description" content="Replay buffers explained, and an honest comparison of NVIDIA, AMD, Game Bar, OBS, Medal and LensCap — including why the capture method is what costs you frames.">
 <meta property="og:url" content="https://maaaaaaxx.github.io/website/game-clip-recorders.html">
-<meta property="og:image" content="https://radium.au/assets/og-radium.png">
+<meta property="og:image" content="https://lenscap.gg/assets/og-lenscap.png">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Clipping the last few minutes of gameplay on Windows">
 <meta name="twitter:description" content="What a replay buffer is, why capture method decides your frame cost, and which recorder suits your GPU.">
-<meta name="twitter:image" content="https://radium.au/assets/og-radium.png">
+<meta name="twitter:image" content="https://lenscap.gg/assets/og-lenscap.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How to clip the last few minutes of gameplay on Windows, on any GPU",
-  "description": "An explanation of replay buffers and an honest comparison of the tools that provide them on Windows: NVIDIA Instant Replay, AMD Radeon, Xbox Game Bar, OBS Studio, Medal and Radium.",
+  "description": "An explanation of replay buffers and an honest comparison of the tools that provide them on Windows: NVIDIA Instant Replay, AMD Radeon, Xbox Game Bar, OBS Studio, Medal and LensCap.",
   "datePublished": "2026-08-21",
   "dateModified": "2026-08-21",
   "inLanguage": "en-AU",
@@ -42,9 +42,9 @@
     "@type": "WebPage",
     "@id": "https://maaaaaaxx.github.io/website/game-clip-recorders.html"
   },
-  "author": { "@type": "Organization", "name": "Radium", "url": "https://radium.au/" },
-  "publisher": { "@type": "Organization", "name": "Radium", "url": "https://radium.au/" },
-  "image": "https://radium.au/assets/og-radium.png"
+  "author": { "@type": "Organization", "name": "LensCap", "url": "https://lenscap.gg/" },
+  "publisher": { "@type": "Organization", "name": "LensCap", "url": "https://lenscap.gg/" },
+  "image": "https://lenscap.gg/assets/og-lenscap.png"
 }
 </script>
 
@@ -74,7 +74,7 @@
       "name": "How long can the buffer be?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Game Bar offers up to 10 minutes and NVIDIA up to 20. OBS and Radium are limited mainly by disk space. Length costs storage rather than performance, since the footage is being encoded either way — the only question is how much of it is kept before being thrown away."
+        "text": "Game Bar offers up to 10 minutes and NVIDIA up to 20. OBS and LensCap are limited mainly by disk space. Length costs storage rather than performance, since the footage is being encoded either way — the only question is how much of it is kept before being thrown away."
       }
     },
     {
@@ -96,12 +96,12 @@
 
 <header class="site-header">
   <div class="wrap wide site-header__inner">
-    <a class="brand" href="https://radium.au/">
-      <span class="brand__name">Radium Guides</span>
-      <span class="brand__note">Published by Radium, written to stand on their own</span>
+    <a class="brand" href="https://lenscap.gg/">
+      <span class="brand__name">LensCap Guides</span>
+      <span class="brand__note">Published by LensCap, written to stand on their own</span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="https://radium.au/">radium.au</a>
+      <a href="https://lenscap.gg/">lenscap.gg</a>
     </nav>
   </div>
 </header>
@@ -121,8 +121,8 @@
         machine you actually own.
       </p>
       <p class="byline">
-        Written by <a href="https://radium.au/">Radium</a> &middot; 21 August 2026 &middot;
-        Radium is one of the tools compared here; see
+        Written by <a href="https://lenscap.gg/">LensCap</a> &middot; 21 August 2026 &middot;
+        LensCap is one of the tools compared here; see
         <a href="#who">the disclosure</a> before you weigh anything below.
       </p>
     </div>
@@ -243,7 +243,7 @@
             <td>Their platform</td>
           </tr>
           <tr>
-            <td><strong>Radium</strong></td>
+            <td><strong>LensCap</strong></td>
             <td>Any GPU with an encoder</td>
             <td>5 to 30 min</td>
             <td>Only to share</td>
@@ -271,7 +271,7 @@
     </p>
     <p>
       When it does not work, the honest options are a vendor-neutral tool: OBS, something
-      commercial, or <a href="https://radium.au/">Radium</a>.
+      commercial, or <a href="https://lenscap.gg/">LensCap</a>.
     </p>
 
     <h3>If you already run OBS</h3>
@@ -333,7 +333,7 @@
       <li><strong>Want zero installs:</strong> Xbox Game Bar, already on your machine.</li>
       <li><strong>Already stream:</strong> OBS Replay Buffer.</li>
       <li><strong>AMD or Intel and the built-in one is misbehaving:</strong> a vendor-neutral tool.</li>
-      <li><strong>Want long buffers, trimming, and clips that stay yours:</strong> that is the gap Radium was built for.</li>
+      <li><strong>Want long buffers, trimming, and clips that stay yours:</strong> that is the gap LensCap was built for.</li>
     </ul>
 
     <h2 id="who">Who wrote this</h2>
@@ -341,14 +341,14 @@
     <div class="note note--who">
       <span class="note__title">Disclosure</span>
       <p>
-        This was written by the people who make Radium, which is one of the six tools in
+        This was written by the people who make LensCap, which is one of the six tools in
         the table. That is a reason to read the recommendations sceptically, so they are
         made as narrow as they honestly can be: if you own an NVIDIA card, the advice above
         is to use NVIDIA's free tool and install nothing, because that is true and pretending
         otherwise would be the fastest way to make this page worthless.
       </p>
       <p>
-        The numbers about capture cost are measurements taken while building Radium, on one
+        The numbers about capture cost are measurements taken while building LensCap, on one
         machine, and are quoted to show the size of the difference rather than to be a
         benchmark. Everything said about other tools is from their own documentation and
         behaviour at the time of writing, and any of it can change with a driver update.
@@ -379,7 +379,7 @@
       <details>
         <summary>How long can the buffer be?</summary>
         <p>
-          Game Bar offers up to 10 minutes and NVIDIA up to 20. OBS and Radium are limited
+          Game Bar offers up to 10 minutes and NVIDIA up to 20. OBS and LensCap are limited
           mainly by disk space. Length costs storage rather than performance, since the
           footage is being encoded either way — the only question is how much of it is kept
           before being thrown away.
@@ -409,12 +409,12 @@
       <h2 id="h-next">If you want the tool this came from</h2>
       <div class="cards">
         <div class="card">
-          <h3>Radium</h3>
+          <h3>LensCap</h3>
           <p>
             Free clip recorder for Windows. Any GPU with a hardware encoder, buffers of 5
             to 30 minutes, trimming built in, and no watermark.
           </p>
-          <a class="btn" href="https://radium.au/">Get it free</a>
+          <a class="btn" href="https://lenscap.gg/">Get it free</a>
         </div>
         <div class="card">
           <h3>How it works</h3>
@@ -422,7 +422,7 @@
             The measurements behind the numbers above, and what it does differently from
             wrapping OBS.
           </p>
-          <a class="btn btn--ghost" href="https://radium.au/#why">Read the detail</a>
+          <a class="btn btn--ghost" href="https://lenscap.gg/#why">Read the detail</a>
         </div>
       </div>
     </section>
@@ -433,7 +433,7 @@
 <footer class="site-footer">
   <div class="wrap wide">
     <p>
-      Published by <a href="https://radium.au/">Radium</a>, a free game clip recorder for
+      Published by <a href="https://lenscap.gg/">LensCap</a>, a free game clip recorder for
       Windows. This guide is hosted separately from the product site and is written to be
       useful whether or not you install anything.
     </p>
